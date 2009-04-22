@@ -231,6 +231,18 @@ ul.projects li h3 a{
   display:block;
 }
 
+ul.projects ul.milestones{
+  border-top:1px solid #ddd;
+}
+ul.projects ul.milestones li{
+  border:none;
+  padding:0;
+}
+ul.projects ul.milestones h4{
+  margin:0;
+  font-size:14px;
+}
+
 /* @end */
 
 /*------------------------------------------------------------------------------------
