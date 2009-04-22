@@ -19,20 +19,20 @@ jQuery.fn.timelineGraph = function(){
     
     // Prepare variables for drawing
     var width = 790, height = 250, leftgutter = 10, rightgutter = 20, topgutter = 10, bottomgutter = 20;
-    var colorhue = 0.6, color = "hsb(" + [colorhue, 1, 0.75] + ")";
+    var colorhue = 0.75, color = "#ffb240";
     var r = Raphael("holder", width, height);
-    var txt =  {"font": '12px "Arial"', stroke: 'none', fill: '#000'},
-        txt1 = {"font": '12px "Arial"', stroke: 'none', fill: '#000'},
-        txt2 = {"font": '12px "Arial"', stroke: 'none', fill: '#000'}
+    var txt =  {"font": '12px "Helvetica"', "font-weight": "bold", stroke: 'none', fill: '#000'},
+        txt1 = {"font": '12px "Helvetica"', "font-weight": "bold", stroke: 'none', fill: '#000'},
+        txt2 = {"font": '12px "Helvetica"', stroke: 'none', fill: '#000'}
     var X = (width - leftgutter) / labels.length,
         max = Math.max.apply(Math, data),
         Y = (height - bottomgutter - topgutter) / max;
     
     // Draw the grid ?
-    r.drawGrid(leftgutter + X*0.5, topgutter, width - leftgutter - X, height - topgutter - bottomgutter, 10, 10, "#999");
+    r.drawGrid(leftgutter + X*0.5, topgutter, width - leftgutter - X, height - topgutter - bottomgutter, 10, 10, "#ddd");
     var path =  r.path({stroke: color, "stroke-width": 3, "stroke-linejoin": "round"}),
         bgp =   r.path({stroke: "none", opacity: 0.3, fill: color}).moveTo(leftgutter + X*0.5, height - bottomgutter),
-        frame = r.rect(10, 10, 100, 40, 5).attr({fill: "#000", stroke: "#474747", "stroke-width": 2}).hide();
+        frame = r.rect(10, 10, 100, 40, 5).attr({fill: "#eee", stroke: "#ccc", "stroke-width": 2}).hide();
     
     // Labels ?
     var label = [],
@@ -40,8 +40,8 @@ jQuery.fn.timelineGraph = function(){
         leave_timer,
         blanket = r.set();
     
-    label[0] = r.text(60, 10, "24 hits").attr(txt).hide();
-    label[1] = r.text(60, 40).attr(txt1).attr({fill: color}).hide();
+    label[0] = r.text(60, 10, "24 tickets").attr(txt).hide();
+    label[1] = r.text(60, 40).attr(txt1).attr({fill: "#666"}).hide();
     
     for(var i=0, ii=labels.length; i<ii; i++){
       var y = Math.round(height - bottomgutter - Y * data[i]),
@@ -49,7 +49,7 @@ jQuery.fn.timelineGraph = function(){
           t = r.text(x, height - 6, labels[i]).attr(txt).toBack();
       bgp[i == 0 ? "lineTo" : "cplineTo"](x, y, 10);
       path[i == 0 ? "moveTo" : "cplineTo"](x, y, 10);
-      var dot = r.circle(x, y, 5).attr({fill: color, stroke: "#000"});
+      var dot = r.circle(x, y, 6).attr({fill: color, stroke: "#fff", "stroke-width": 2});
       blanket.push(r.rect(leftgutter + X * i, 0, X, height - bottomgutter).attr({stroke: "none", fill: "#fff", opacity: 0}));
       var rect = blanket[blanket.length - 1];
       (function(x, y, data, lbl, dot){
@@ -61,8 +61,8 @@ jQuery.fn.timelineGraph = function(){
             newcoord.x -= 114;
           }
           frame.show().animate({x: newcoord.x, y:newcoord.y}, 200*is_label_visible);
-          label[0].attr({text:data + " hit" + ((data % 10 == 1) ? "" : "s")}).show().animate({x: newcoord.x*1 + 50, y:newcoord.y*1 + 12}, 200 *is_label_visible);
-          label[1].attr({text: lbl + " September 2008"}).show().animate({x: newcoord.x * 1 + 50, y: newcoord.y * 1 + 27}, 200 * is_label_visible);
+          label[0].attr({text:data + " ticket" + ((data == 1) ? "" : "s")}).show().animate({x: newcoord.x*1 + 50, y:newcoord.y*1 + 12}, 200 *is_label_visible);
+          label[1].attr({text: lbl}).show().animate({x: newcoord.x * 1 + 50, y: newcoord.y * 1 + 27}, 200 * is_label_visible);
           dot.attr("r", 7);
           is_label_visible = true;
           r.safari();
