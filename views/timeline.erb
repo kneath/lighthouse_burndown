@@ -1,29 +1,32 @@
 <% page_info :title => "Timeline &amp; Graph",
               :breadcrumb => [ link_to("Tender Support", "/"), link_to("May Release", "/project") ] %>
 
-<table class="timeline">
-  <tfoot>
-    <tr>
-      <% @start_date.upto(@due_date) do |day| %>
-        <th><%= day.strftime("%m/%d") %></th>
-      <% end %>
-    </tr>
-  </tfoot>
-  <tbody>
-    <tr>
-      <% value = (@due_date - @start_date).to_i*5 %>
-      <% @start_date.upto(@due_date) do |day| %>
-        <td><%= value = value - rand(5) %></td>
-      <% end %>
-    </tr>
-  </tbody>
-</table>
+<div class="graph">
+  <table class="timeline">
+    <tfoot>
+      <tr>
+        <% @start_date.upto(@due_date) do |day| %>
+          <th><%= day.strftime("%m/%d") %></th>
+        <% end %>
+      </tr>
+    </tfoot>
+    <tbody>
+      <tr>
+        <% value = (@due_date - @start_date).to_i*5 %>
+        <% @start_date.upto(@due_date) do |day| %>
+          <td><%= value = value - rand(5) %></td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+  <div id="holder"></div>
+</div>
 
 <ol class="timeline">
   <% 10.times do %>
   <li>
     <h3>January 21</h3>
-    <span class="big">-8</span>
+    <span class="big"><%= rand(10) < 5 ? "-" : "+" %><%= rand(15) %></span>
     <ul class="events">
       <li>Rick <strong>closed</strong> <em class="positive">15</em> tickets</li>
       <li>Kyle <strong>opened</strong> <em class="negative">5</em> tickets and <strong>closed</strong> <em class="positive">3</em> tickets</li>
