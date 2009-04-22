@@ -1,0 +1,93 @@
+/* Contains master styles for main layout, typography and page styles */
+
+/*------------------------------------------------------------------------------------
+  @group Global Reset
+------------------------------------------------------------------------------------*/
+body { padding:0; margin:0; }
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, label, ul, ol, dl, fieldset, address { margin:1em 0; padding:0; }
+li, dd { margin-left:5%; }
+fieldset { padding: .5em; }
+select option{ padding:0 5px; }
+
+.access{ display:none; } /* For accessibility related elements */
+.clear{ clear:both; height:0px; font-size:0px; line-height:0px; overflow:hidden; }
+a{ outline:none; }
+a img{ border:none; }
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+* html .clearfix {height: 1%;}
+.clearfix {display:inline-block;}
+.clearfix {display: block;}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Type
+------------------------------------------------------------------------------------*/
+
+body{
+  background:#fff;
+  color:#000;
+  font-family:Helvetica, Arial, sans-serif;
+  font-size:12px;
+}
+
+h2{
+  margin:0;
+  font-size:18px;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Forms
+------------------------------------------------------------------------------------*/
+
+dl.form{
+  margin:15px 0;
+}
+dl.form dt{
+  margin:0;
+  color:#000;
+  font-weight:bold;
+}
+dl.form dd{
+  margin:3px 0 0 0;
+  font-size:16px;
+  color:#000;
+}
+
+input[type=text]{
+  font-family:Helvetica, Arial, sans-serif;
+  padding:5px 10px;
+  width:95%;
+  font-size:16px;
+  color:#000;
+  background:#fff;
+}
+input[type=text].short{
+  width:100px;
+}
+
+ul.form-actions{
+  margin:15px 0;
+  text-align:right;
+}
+ul.form-actions li{
+  display:inline;
+  list-style-type:none;
+  margin:0 0 0 10px;
+}
+ul.form-actions button{
+  font-size:16px;
+  font-weight:bold;
+  -webkit-appearance:push-button;
+}
+
+/* @end */

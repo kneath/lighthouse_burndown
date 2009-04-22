@@ -1,0 +1,14 @@
+# This should be a complete connection string to your database.
+#
+# Examples:
+# * `mysql://user:password@localhost/burndown`
+# * `postgres://user:password@localhost/burndown`
+# * `sqlite3:///home/integrity/db/burndown.sqlite`
+#
+# Note:
+# * The appropriate data_objects adapter must be installed (`do_mysql`, etc)
+# * You must create the `burndown` database on localhost, of course.
+:database_uri: mysql://root@localhost/burndown
+
+# Path to the burndown log file
+:log: /var/log/burndown.log
