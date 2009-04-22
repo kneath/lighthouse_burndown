@@ -28,6 +28,88 @@ a img{ border:none; }
 /* @end */
 
 /*------------------------------------------------------------------------------------
+  @group Main Layout
+------------------------------------------------------------------------------------*/
+
+#superheader, #titlebar .inner, #content, #footer{
+  margin:0 auto;
+  width:800px;
+}
+
+#superheader{
+  padding:8px 0;
+  height:16px;
+}
+ul#nav{
+  margin:0;
+  float:left;
+}
+ul#nav li{
+  list-style-type:none;
+  margin:0 20px 0 0;
+  display:inline;
+}
+ul#nav a{
+  color:#888;
+  font-weight:normal;
+}
+ul#nav a.selected{
+  font-weight:bold;
+  color:#000;
+}
+#superheader p.welcome{
+  margin:0;
+  float:right;
+  color:#888;
+}
+#superheader p.welcome strong.miniapp{
+  color:#990000;
+}
+#superheader p.welcome a{
+  font-weight:bold;
+  color:#000;
+}
+
+#titlebar{
+  background:#006699;
+  border-top:1px solid #00476b;
+  border-bottom:2px solid #00476b;
+  color:#fff;
+}
+#titlebar .inner{
+  padding:15px 0;
+}
+#titlebar p{
+  margin:0;
+  color:#8cbdd6;
+  font-size:18px;
+  letter-spacing:-1px;
+}
+#titlebar a{
+  color:#8cbdd6;
+  font-weight:normal;
+}
+#titlebar h1{
+  margin:0;
+  font-size:36px;
+  letter-spacing:-2px;
+}
+
+#footer{
+  padding:10px 0 50px 0;
+  color:#666;
+  border-top:3px solid #333;
+}
+#footer p{
+  margin:0;
+}
+#footer p strong{
+  color:#000;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
   @group Type
 ------------------------------------------------------------------------------------*/
 
@@ -38,10 +120,79 @@ body{
   font-size:12px;
 }
 
+a{
+  text-decoration:none;
+  font-weight:bold;
+  color:#006699;
+}
+
 h2{
   margin:0;
   font-size:18px;
 }
+
+em.positive{
+  font-style:normal;
+  color:#006407;
+}
+em.negative{
+  font-style:normal;
+  color:#990000;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Timeline
+------------------------------------------------------------------------------------*/
+
+ol.timeline{
+  margin:20px 0;
+}
+ol.timeline>li{
+  position:relative;
+  list-style-type:none;
+  margin:10px 0;
+  padding:20px 20px 20px 120px;
+  background:#f5f5f5;
+}
+ol.timeline>li:nth-child(even){
+  background:#fff;
+}
+ol.timeline>li>h3{
+  position:absolute;
+  top:50%;
+  left:20px;
+  margin:-5px 0 0 0;
+  color:#666;
+  font-size:12px;
+  text-transform:uppercase;
+}
+ol.timeline>li>.big{
+  position:absolute;
+  top:50%;
+  right:20px;
+  margin-top:-18px;
+  font-size:36px;
+  font-weight:bold;
+  color:#bbb;
+}
+
+ol.timeline ul.events{
+  margin:0;
+  border-left:1px solid #ccc;
+}
+ol.timeline ul.events>li{
+  list-style-type:none;
+  margin:5px 0;
+  padding-left:15px;
+  font-size:12px;
+  color:#333;
+}
+ol.timeline ul.events>li strong{
+  color:#000;
+}
+ol.timeline ul.events>li em{ font-weight:bold; }
 
 /* @end */
 
