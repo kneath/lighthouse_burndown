@@ -7,9 +7,20 @@ module Burndown
     include Burndown
     include Burndown::Helpers
     
-    # project listing
     get "/" do
       show :index
+    end
+    
+    get "/project" do
+      show :project
+    end
+    
+    get "/timeline" do
+      show :timeline
+    end
+    
+    get "/setup" do
+      show :setup
     end
     
   end

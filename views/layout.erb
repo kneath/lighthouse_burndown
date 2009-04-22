@@ -2,7 +2,7 @@
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
   <head>
-    <title>Burndown</title>
+    <title><%= @title %> &ndash; Burndown</title>
     <link rel="stylesheet" href="/css/global.css" type="text/css" charset="utf-8" />
     <!--[if IE 6]>
       <link href="/css/ie6.css" rel="stylesheet" type="text/css" />
@@ -14,9 +14,9 @@
   <body>
     <div id="superheader">
       <ul id="nav">
-        <li><a href="#">My Projects</a></li>
-        <li><a href="#" class="selected">Timeline &amp; Graph</a></li>
-        <li><a href="#">Setup</a></li>
+        <li><a href="/">My Projects</a></li>
+        <li><a href="/timeline" class="selected">Timeline &amp; Graph</a></li>
+        <li><a href="/setup">Setup</a></li>
       </ul>
       <p class="welcome">
         <strong class="miniapp">Burndown</strong>
@@ -26,24 +26,14 @@
     </div><!-- /#superheader -->
     <div id="titlebar">
       <div class="inner">
-        <p><a href="#">Tender Support</a> / <a href="#">May Release</a></p>
-        <h1>Timeline &amp; Graph</h1>
+        <% if @breadcrumb %>
+          <p><%= @breadcrumb.join(" / ") %></p>
+        <% end %>
+        <h1><%= @title %></h1>
       </div>
     </div><!-- /#titlebar -->
     <div id="content">
-      <ol class="timeline">
-        <% 10.times do %>
-        <li>
-          <h3>January 21</h3>
-          <span class="big">-8</span>
-          <ul class="events">
-            <li>Rick <strong>closed</strong> <em class="positive">15</em> tickets</li>
-            <li>Kyle <strong>opened</strong> <em class="negative">5</em> tickets and <strong>closed</strong> <em class="positive">3</em> tickets</li>
-            <li>Courtenay <strong>opened</strong> <em class="negative">5</em> tickets</li>
-          </ul>
-        </li>
-        <% end %>
-      </ol>
+      <%= yield %>
     </div><!-- /#content -->
     <div id="footer">
       <p><strong>Burndown</strong> was created by <a href="http://kyleneath.com">Kyle Neath</a>.  Made with love for <a href="http://lighthouseapp.com">Lighthouse</a>.</p>

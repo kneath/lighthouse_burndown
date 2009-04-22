@@ -53,6 +53,10 @@ ul#nav a{
   color:#888;
   font-weight:normal;
 }
+ul#nav a:hover{
+  text-decoration:underline;
+  color:#333;
+}
 ul#nav a.selected{
   font-weight:bold;
   color:#000;
@@ -88,6 +92,10 @@ ul#nav a.selected{
 #titlebar a{
   color:#8cbdd6;
   font-weight:normal;
+}
+#titlebar a:hover{
+  color:#fff;
+  text-decoration:underline;
 }
 #titlebar h1{
   margin:0;
@@ -194,6 +202,34 @@ ol.timeline ul.events>li strong{
   color:#000;
 }
 ol.timeline ul.events>li em{ font-weight:bold; }
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Project Listing
+------------------------------------------------------------------------------------*/
+
+ul.projects{
+  margin:20px 0;
+}
+ul.projects li{
+  list-style-type:none;
+  margin:10px 0;
+  padding:10px;
+  border:1px solid #ddd;
+}
+ul.projects li h3{
+  margin:0;
+  font-size:20px;
+  letter-spacing:-1px;
+}
+ul.projects li p{
+  margin:0;
+  color:#999;
+}
+ul.projects li h3 a{
+  display:block;
+}
 
 /* @end */
 
