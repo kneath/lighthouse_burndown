@@ -176,6 +176,7 @@ ol.timeline>li>.big{
   font-size:36px;
   font-weight:bold;
   color:#bbb;
+  text-shadow:#fff 0 2px 1px;
 }
 
 ol.timeline ul.events{
