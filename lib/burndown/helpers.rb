@@ -16,5 +16,14 @@ module Burndown
       @title = options[:title] if options[:title]
       @breadcrumb = options[:breadcrumb] if options[:breadcrumb]
     end
+    
+    def segmented_range(start_date, end_date, options = {}, &block)
+      options[:segments] ||= 30
+      options[:segements] = options[:segments] - 1
+      range = start_date..end_date
+      
+      step_size = [range.to_a.size/options[:segments], 1].max
+      (start_date..end_date).step(step_size, &block)
+    end
   end
 end

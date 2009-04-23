@@ -16,7 +16,7 @@ module Burndown
     end
     
     get "/timeline" do
-      @start_date = Date.new(2009, 4, 8)
+      @start_date = Date.new(2009, 3, 8)
       @due_date = Date.new(2009, 4, 30)
       show :timeline
     end

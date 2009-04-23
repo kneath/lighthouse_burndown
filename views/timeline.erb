@@ -5,14 +5,14 @@
   <table class="timeline">
     <tfoot>
       <tr>
-        <% @start_date.upto(@due_date) do |day| %>
+        <% segmented_range(@start_date, @due_date, :segments => 15) do |day| %>
           <th><%= day.strftime("%m/%d") %></th>
         <% end %>
       </tr>
     </tfoot>
     <tbody>
       <tr>
-        <% value = (@due_date - @start_date).to_i*5 %>
+        <% value = 15*3 %>
         <% @start_date.upto(@due_date) do |day| %>
           <td><%= value = value - rand(5) %></td>
         <% end %>
