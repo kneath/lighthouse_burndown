@@ -1,0 +1,30 @@
+<% page_info :title => "Setup Burndown" %>
+
+<p>Burndown works with <a href="#">Lighthouse</a> to help you visualize your ticket closure rate and provide a burndown chart.</p>
+
+
+<div class="tab-group setup">
+  <ul class="tabs">
+    <% @tokens.each do |token| %>
+      <li>
+        <a href="#token_<%= token.token %>"><%=h token.note %></a>
+        <span class="token"><%= token.token %></span>
+      </li>
+    <% end %>
+  </ul>
+
+  <% @tokens.each do |token| %>
+    <div id="token_<%= token.token %>" class="tab-content">
+      <div class="title">
+        <span class="access">Read+Write</span>
+        <h2>Account: <em>entp</em></h2>
+      </div>
+    
+      <div class="project">
+        <span class="state active">Active &ndash; <a href="#">Deactivate</a></span>
+        <h3>Tender</h3>
+        <p>tracking since 5/5/09</p>
+      </div>
+    </div><!-- /.tab-content -->
+  <% end %>
+</div><!-- /.tab-group -->

@@ -303,3 +303,70 @@ ul.form-actions button{
 }
 
 /* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Tab Group
+------------------------------------------------------------------------------------*/
+
+.tab-group{
+  margin:20px 0;
+  border-top:1px solid #ddd;
+}
+
+.tab-group ul.tabs{
+  margin:0;
+  float:left;
+  width:260px;
+}
+.tab-group ul.tabs li{
+  list-style-type:none;
+  margin:0;
+  padding:10px 10px 10px 0;
+  border-bottom:1px solid #ddd;
+}
+.tab-group ul.tabs li a.selected{
+  color:#000;
+}
+
+.tab-group .tab-content{
+  margin-left:260px;
+  border-left:1px solid #ddd;
+  padding-left:10px;
+  padding-bottom:10px;
+}
+
+/* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Setup Page
+------------------------------------------------------------------------------------*/
+
+.setup ul.tabs a{
+  font-size:14px;
+}
+.setup .token{
+  display:block;
+  margin-top:5px;
+  color:#888;
+}
+
+.setup .title{
+  margin-left:-10px;
+  margin-bottom:15px;
+  width:100%;
+  padding:10px 0 10px 10px;
+  background:#f1f1f1;
+  border-bottom:1px solid #eee;
+}
+.setup .title h2{
+  margin:0;
+  font-size:18px;
+  font-weight:normal;
+  color:#333;
+}
+.setup .title h2 em{
+  font-style:normal;
+  color:#000;
+}
+
+/* @end */
