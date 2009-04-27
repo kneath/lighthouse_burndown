@@ -8,6 +8,7 @@ module Burndown
     property :note,       String
     
     validates_present :token, :account
+    validates_is_unique :token
     
     # Checks the Lighthouse API to make sure the token is good
     def valid_lighthouse_token?

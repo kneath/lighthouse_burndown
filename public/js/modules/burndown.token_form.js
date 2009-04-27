@@ -14,13 +14,13 @@ jQuery.fn.tokenForm = function(){
           loader.text('Token saved successfully!');
           message.text('Your token has been saved!').removeClass('error').addClass('success').show();
           setTimeout(function(){ loader.removeClass('success').hide() }, 2000);
+          document.location = document.location;
           state = 'check';
         },
         error: function(){
           loader.text('Error saving token').addClass('error');
-          message.text('Your token did not save properly. Please check your information and try again.').addClass('error');
+          message.text('Your token did not save properly. Make sure you are not adding a duplicated token.').addClass('error').show();
           setTimeout(function(){ loader.removeClass('error').hide() }, 2000);
-          document.location = document.location;
           state = 'check';
         }
       })
