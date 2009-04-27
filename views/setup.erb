@@ -3,7 +3,7 @@
 <p>Burndown works with <a href="#">Lighthouse</a> to help you visualize your ticket closure rate and provide a burndown chart.</p>
 
 
-<div class="tab-group setup">
+<div class="tab-group setup clearfix">
   <ul class="tabs">
     <% @tokens.each do |token| %>
       <li>
@@ -11,26 +11,44 @@
         <span class="token"><%= token.token %></span>
       </li>
     <% end %>
+    <li>
+      <a href="#new_token">+ Add a token</a>
+    </li>
   </ul>
 
   <% @tokens.each do |token| %>
     <div id="token_<%= token.token %>" class="tab-content">
       <div class="title">
         <span class="accesslevel">Read+Write</span>
-        <h2>Token: <em><%= token.note %></em></h2>
+        <h2>Token for account: <em>entp</em></h2>
         <p><%= token.token %></p>
       </div>
           
       <div class="project active">
         <span class="state">Active &ndash; <a href="#">Deactivate</a></span>
-        <h3><em>entp /</em> Tender</h3>
+        <h3>Tender</h3>
         <p>Tracking progress since 5/5/09</p>
       </div>
       
       <div class="project inactive">
         <span class="state">Inactive &ndash; <a href="#">Activate</a></span>
-        <h3><em>entp /</em> Lighthouse</h3>
+        <h3>Lighthouse</h3>
       </div>
     </div><!-- /.tab-content -->
   <% end %>
+  <div id="new_token" class="tab-content">
+    <div class="title">
+      <h2>Add a new token</h2>
+      <p>You can manage your Lighthouse tokens by clicking your name in the upper right, then bottom right sidebar.</p>
+      <div class="form">
+        <form action="/setup" method="post">
+          <p><input type="text" name="token[account]" class="short" placeholder="foo" /> .lighthouseapp.com</p>
+          <p><input type="text" name="token[token]" placeholder="Token" /></p>
+          <ul class="form-actions">
+            <li><button type="submit">Save Token</button></li>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
 </div><!-- /.tab-group -->

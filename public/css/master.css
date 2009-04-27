@@ -249,6 +249,10 @@ ul.projects ul.milestones h4{
   @group Forms
 ------------------------------------------------------------------------------------*/
 
+div.form{
+  margin:20px 0;
+}
+
 dl.form{
   margin:15px 0;
 }
@@ -261,6 +265,9 @@ dl.form dd{
   margin:3px 0 0 0;
   font-size:16px;
   color:#000;
+}
+.form p{
+  font-size:16px;
 }
 
 input[type=text]{
@@ -324,6 +331,9 @@ ul.form-actions button{
   padding:10px 10px 10px 0;
   border-bottom:1px solid #ddd;
 }
+.tab-group ul.tabs li a{
+  display:block;
+}
 .tab-group ul.tabs li a.selected{
   color:#000;
 }
@@ -379,6 +389,7 @@ ul.form-actions button{
 .setup .title p{
   margin:5px 0 0 0;
   color:#666;
+  line-height:1.5;
 }
 
 .setup .project{
