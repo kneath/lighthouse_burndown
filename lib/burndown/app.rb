@@ -27,5 +27,21 @@ module Burndown
       show :setup
     end
     
+    # Validates a token (AJAX method)
+    post "/token_validity" do
+      @token = Token.new(params[:token])
+      status (@token.valid_lighthouse_token? ? 200 : 500)
+    end
+    
+    # Creates a new token (AJAX method)
+    post "/token" do
+      @token = Token.new(params[:token])
+      if @token.save
+        status 200
+      else
+        status 500
+      end
+    end
+    
   end
 end

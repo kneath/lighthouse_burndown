@@ -8,7 +8,7 @@
 # Note:
 # * The appropriate data_objects adapter must be installed (`do_mysql`, etc)
 # * You must create the `burndown` database on localhost, of course.
-:database_uri: mysql://root@localhost/burndown
+:database_uri: mysql://root@localhost/burndown_dev
 
 # Path to the burndown log file
 :log: /var/log/burndown.log

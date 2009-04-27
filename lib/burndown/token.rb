@@ -7,5 +7,10 @@ module Burndown
     property :account,    String, :nullable => false
     
     validates_present :token, :account
+    
+    # Checks the Lighthouse API to make sure the token is good
+    def valid_lighthouse_token?
+      false
+    end
   end
 end

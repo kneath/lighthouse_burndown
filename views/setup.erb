@@ -41,12 +41,18 @@
       <h2>Add a new token</h2>
       <p>You can manage your Lighthouse tokens by clicking your name in the upper right, then bottom right sidebar.</p>
       <div class="form">
-        <form action="/setup" method="post">
+        <form action="/token" method="post" id="token_form">
+          <p class="message" style="display:none"></p>
+          
           <p><input type="text" name="token[account]" class="short" placeholder="foo" /> .lighthouseapp.com</p>
           <p><input type="text" name="token[token]" placeholder="Token" /></p>
           <ul class="form-actions">
-            <li><button type="submit">Save Token</button></li>
+            <li><button type="submit">Check Token Validity</button></li>
           </ul>
+          
+          <div class="loader" style="display:none">
+            Checking token validity...
+          </div>
         </form>
       </div>
     </div>

@@ -293,7 +293,6 @@ ul.form-actions li{
 }
 ul.form-actions button{
   font-size:16px;
-  font-weight:bold;
   -webkit-appearance:push-button;
 }
 
@@ -341,7 +340,7 @@ ul.form-actions button{
 .tab-group .tab-content{
   margin-left:260px;
   border-left:1px solid #ddd;
-  padding-left:20px;
+  padding-left:10px;
   padding-bottom:10px;
 }
 
@@ -427,6 +426,40 @@ ul.form-actions button{
 .setup .project p{
   margin:5px 0 0 0;
   color:#666;
+}
+
+#token_form{
+  position:relative;
+}
+#token_form .loader{
+  position:absolute;
+  top:50%;
+  left:50%;
+  margin:-50px 0 0 -150px;
+  width:260px;
+  height:60px;
+  padding:20px;
+  -webkit-border-radius:15px;
+  -moz-border-radius:15px;
+  opacity: 0.9;
+  background:#000;
+  color:#fff;
+  font-size:12px;
+  text-align:center;
+  line-height:60px;
+  font-size:16px;
+}
+#token_form .loader.error{
+  background:#990000;
+}
+
+#token_form .message{
+  font-weight:bold;
+  font-size:12px;
+  color:#000;
+}
+#token_form .message.error{
+  color:#990000;
 }
 
 /* @end */
