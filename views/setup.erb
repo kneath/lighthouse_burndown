@@ -23,17 +23,19 @@
         <h2>Token for account: <em><%=h token.account %></em></h2>
         <p><%= token.token %></p>
       </div>
-          
-      <div class="project active">
-        <span class="state">Active &ndash; <a href="#">Deactivate</a></span>
-        <h3>Tender</h3>
-        <p>Tracking progress since 5/5/09</p>
-      </div>
       
-      <div class="project inactive">
-        <span class="state">Inactive &ndash; <a href="#">Activate</a></span>
-        <h3>Lighthouse</h3>
-      </div>
+      <% Burndown::Project.for_token(token).each do |project| %>
+        <div class="project <%= project.active ? 'active' : 'inactive' %>">
+          <span class="state">
+            <% if project.active %>
+              Active &ndash; <a href="#">Deactivate</a>
+            <% else %>
+              Inactive &ndash; <a href="#">Activate</a>
+            <% end %>
+          </span>
+          <h3><%=h project.name %></h3>
+        </div>
+      <% end %>
     </div><!-- /.tab-content -->
   <% end %>
   <div id="new_token" class="tab-content">

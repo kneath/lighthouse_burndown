@@ -16,6 +16,7 @@ require "httparty"
 
 require "burndown/helpers"
 require "burndown/lighthouse"
+require "burndown/project"
 require "burndown/token"
 require "burndown/app"
 
