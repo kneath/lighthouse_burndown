@@ -6,7 +6,23 @@ jQuery.fn.tokenForm = function(){
     var state = 'check';
     
     var saveToken = function(){
-      return;
+      $.ajax({
+        type: 'POST',
+        url: '/tokens',
+        data: form.serialize(),
+        success: function(){
+          loader.text('Token saved successfully!');
+          message.text('Your token has been saved!').removeClass('error').addClass('success').show();
+          setTimeout(function(){ loader.removeClass('success').hide() }, 2000);
+          state = 'check';
+        },
+        error: function(){
+          loader.text('Error saving token').addClass('error');
+          message.text('Your token did not save properly. Please check your information and try again.').addClass('error');
+          setTimeout(function(){ loader.removeClass('error').hide() }, 2000);
+          state = 'check';
+        }
+      })
     }
     
     var checkToken = function(){

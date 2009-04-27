@@ -34,8 +34,9 @@ module Burndown
     end
     
     # Creates a new token (AJAX method)
-    post "/token" do
+    post "/tokens" do
       @token = Token.new(params[:token])
+      @token.set_note
       if @token.save
         status 200
       else

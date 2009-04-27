@@ -7,9 +7,8 @@ module Burndown
       "#{}"
     end
     
-    def self.check_token(account, token)
-      result = get "http://#{account}.lighthouseapp.com/tokens/#{token}.xml", :headers => {'X-LighthouseToken' => token}
-      result["token"] ? true : false
+    def self.get_token(account, token)
+      get "http://#{account}.lighthouseapp.com/tokens/#{token}.xml", :headers => {'X-LighthouseToken' => token}
     end
   end
 end
