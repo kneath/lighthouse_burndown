@@ -10,7 +10,7 @@ module Burndown
     
     # Checks the Lighthouse API to make sure the token is good
     def valid_lighthouse_token?
-      false
+      Lighthouse.check_token(self.account, self.token)
     end
   end
 end

@@ -15,6 +15,7 @@ require "ostruct"
 require "httparty"
 
 require "burndown/helpers"
+require "burndown/lighthouse"
 require "burndown/token"
 require "burndown/app"
 

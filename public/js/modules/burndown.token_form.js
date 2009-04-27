@@ -22,6 +22,7 @@ jQuery.fn.tokenForm = function(){
           loader.text('Invalid token!').addClass('error');
           message.text('Your token does not appear to be valid. Please make sure you\'ve entered the correct values.').addClass('error').show();
           setTimeout(function(){ loader.removeClass('error').hide() }, 2000);
+          state = 'check';
         }
       });
     }
