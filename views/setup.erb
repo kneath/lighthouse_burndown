@@ -16,14 +16,20 @@
   <% @tokens.each do |token| %>
     <div id="token_<%= token.token %>" class="tab-content">
       <div class="title">
-        <span class="access">Read+Write</span>
-        <h2>Account: <em>entp</em></h2>
+        <span class="accesslevel">Read+Write</span>
+        <h2>Token: <em><%= token.note %></em></h2>
+        <p><%= token.token %></p>
       </div>
-    
-      <div class="project">
-        <span class="state active">Active &ndash; <a href="#">Deactivate</a></span>
-        <h3>Tender</h3>
-        <p>tracking since 5/5/09</p>
+          
+      <div class="project active">
+        <span class="state">Active &ndash; <a href="#">Deactivate</a></span>
+        <h3><em>entp /</em> Tender</h3>
+        <p>Tracking progress since 5/5/09</p>
+      </div>
+      
+      <div class="project inactive">
+        <span class="state">Inactive &ndash; <a href="#">Activate</a></span>
+        <h3><em>entp /</em> Lighthouse</h3>
       </div>
     </div><!-- /.tab-content -->
   <% end %>

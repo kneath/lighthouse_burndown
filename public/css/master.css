@@ -331,7 +331,7 @@ ul.form-actions button{
 .tab-group .tab-content{
   margin-left:260px;
   border-left:1px solid #ddd;
-  padding-left:10px;
+  padding-left:20px;
   padding-bottom:10px;
 }
 
@@ -351,22 +351,71 @@ ul.form-actions button{
 }
 
 .setup .title{
+  position:relative;
   margin-left:-10px;
   margin-bottom:15px;
   width:100%;
   padding:10px 0 10px 10px;
-  background:#f1f1f1;
-  border-bottom:1px solid #eee;
 }
 .setup .title h2{
   margin:0;
-  font-size:18px;
+  font-size:22px;
   font-weight:normal;
   color:#333;
 }
 .setup .title h2 em{
   font-style:normal;
   color:#000;
+}
+.setup .accesslevel{
+  position:absolute;
+  top:15px;
+  right:0;
+  margin:0 10px 0 0;
+  text-transform:uppercase;
+  font-size:11px;
+  color:#666;
+}
+.setup .title p{
+  margin:5px 0 0 0;
+  color:#666;
+}
+
+.setup .project{
+  margin:5px 0;
+  padding:10px;
+  border:1px solid #ddd;
+  background:#f1f1f1;
+}
+.setup .project.active{
+  background:#fff;
+}
+.setup .project .state{
+  float:right;
+  margin-top:3px;
+  font-weight:bold;
+}
+.setup .project.inactive .state{
+  color:#999;
+}
+.setup .project.active .state a{
+  color:#990000;
+}
+.setup .project h3{
+  margin:0;
+  font-weight:normal;
+  font-size:16px;
+}
+.setup .project.inactive h3{
+  color:#999;
+}
+.setup .project h3 em{
+  font-style:normal;
+  color:#999;
+}
+.setup .project p{
+  margin:5px 0 0 0;
+  color:#666;
 }
 
 /* @end */
