@@ -22,8 +22,7 @@ module Burndown
     end
     
     get "/setup" do
-      @tokens = [ OpenStruct.new({:note => "All Projects",      :token => "c52afafd297721ec4896956e4f29fcf0fedeef44"}),
-                  OpenStruct.new({:note => "Read Only Tender",  :token => "5df6f2ewc52afafd297721ec4896956e4f29fcf0"})]
+      @tokens = Token.all
       show :setup
     end
     

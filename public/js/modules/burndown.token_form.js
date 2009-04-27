@@ -20,6 +20,7 @@ jQuery.fn.tokenForm = function(){
           loader.text('Error saving token').addClass('error');
           message.text('Your token did not save properly. Please check your information and try again.').addClass('error');
           setTimeout(function(){ loader.removeClass('error').hide() }, 2000);
+          document.location = document.location;
           state = 'check';
         }
       })
