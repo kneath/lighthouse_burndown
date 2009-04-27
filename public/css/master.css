@@ -322,7 +322,7 @@ ul.form-actions button{
 .tab-group ul.tabs{
   margin:0;
   float:left;
-  width:260px;
+  width:270px;
 }
 .tab-group ul.tabs li{
   list-style-type:none;
@@ -338,7 +338,7 @@ ul.form-actions button{
 }
 
 .tab-group .tab-content{
-  margin-left:260px;
+  margin-left:270px;
   border-left:1px solid #ddd;
   padding-left:10px;
   padding-bottom:10px;
