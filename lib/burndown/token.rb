@@ -3,9 +3,10 @@ module Burndown
     include DataMapper::Resource
     
     property :id,         Serial
-    property :token,      String, :nullable => false
-    property :account,    String, :nullable => false
+    property :token,      String,   :nullable => false
+    property :account,    String,   :nullable => false
     property :note,       String
+    property :read_only,  Boolean,  :default => false
     
     validates_present :token, :account
     validates_is_unique :token
@@ -16,10 +17,15 @@ module Burndown
       @lighthouse_token["token"] ? true : false
     end
     
-    # Retrieves the note of the token from Lighthouse
-    def set_note
+    # Retrieves the note & read/write status of the token from Lighthouse
+    def set_data
       get_lighthouse_token
       self.note = @lighthouse_token["token"]["note"] || "N/A"
+      self.read_only = @lighthouse_token["token"]["read_only"]
+    end
+    
+    def read_write
+      self.read_only? ? "Readonly" : "Read+Write"
     end
     
   private

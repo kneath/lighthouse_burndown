@@ -19,8 +19,8 @@
   <% @tokens.each do |token| %>
     <div id="token_<%= token.token %>" class="tab-content">
       <div class="title">
-        <span class="accesslevel">Read+Write</span>
-        <h2>Token for account: <em>entp</em></h2>
+        <span class="accesslevel"><%= token.read_write %></span>
+        <h2>Token for account: <em><%=h token.account %></em></h2>
         <p><%= token.token %></p>
       </div>
           
