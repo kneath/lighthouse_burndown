@@ -24,9 +24,9 @@
       </div>
       
       <% Burndown::Project.for_token(token).each do |project| %>
-        <div class="project <%= project.active ? 'active' : 'inactive' %>">
+        <div class="project <%= project.active? ? 'active' : 'inactive' %>">
           <span class="state">
-            <% if project.active %>
+            <% if project.active? %>
               Active &ndash; <a href="#">Deactivate</a>
             <% else %>
               Inactive &ndash; <a href="#">Activate</a>
