@@ -9,7 +9,7 @@ module Burndown
     property :read_only,  Boolean,  :default => false
     
     validates_present :token, :account
-    validates_is_unique :token
+    validates_is_unique :token, :scope => :account
     
     # Checks the Lighthouse API to make sure the token is good
     def valid_lighthouse_token?
