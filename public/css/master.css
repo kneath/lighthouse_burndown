@@ -353,6 +353,11 @@ ul.form-actions button{
 .setup ul.tabs a{
   font-size:14px;
 }
+.setup ul.tabs a em{
+  font-style:normal;
+  font-weight:normal;
+  color:#999;
+}
 .setup .token{
   display:block;
   margin-top:5px;
