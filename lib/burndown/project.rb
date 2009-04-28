@@ -3,8 +3,11 @@ module Burndown
     include DataMapper::Resource
     
     property :id,             Serial
+    property :remote_id,      Integer,  :nullable => false
     property :name,           String,   :nullable => false
     property :active_since,   DateTime
+    
+    belongs_to :token
     
     # Calls the api to get projects for the token
     def self.for_token(token)
