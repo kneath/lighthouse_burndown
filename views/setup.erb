@@ -7,8 +7,7 @@
   <ul class="tabs">
     <% @tokens.each do |token| %>
       <li>
-        <a href="#token_<%= "#{token.account}_#{token.token}" %>"><%=h token.note %> <em>(<%=h token.account %>)</em></a>
-        <span class="token"><%= token.token %></span>
+        <a href="#token_<%= "#{token.account}_#{token.token}" %>"><%=h token.note %> <em><%=h token.account %>.lighthouseapp.com</em></a>
       </li>
     <% end %>
     <li>
@@ -20,7 +19,7 @@
     <div id="token_<%= "#{token.account}_#{token.token}" %>" class="tab-content">
       <div class="title">
         <span class="accesslevel"><%= token.read_write %></span>
-        <h2>Token for account: <em><%=h token.account %></em></h2>
+        <h2><%=h token.account %>.lighthouseapp.com</h2>
         <p><%= token.token %></p>
       </div>
       
