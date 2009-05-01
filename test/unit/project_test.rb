@@ -19,7 +19,7 @@ class ProjectTest < Test::Unit::TestCase
     stub(Lighthouse).get_projects{
       {
         "projects" => [
-          { "name" => "RemoteFoo",   "id" => "11" },
+          { "name" => "RemoteFoo",   "id" => "42" },
           { "name" => "RemoteFoo22", "id" => "22" },
           { "name" => "RemoteFoo33", "id" => "33" },
           { "name" => @activated_project.name, :id => @activated_project.remote_id.to_s }
@@ -29,6 +29,7 @@ class ProjectTest < Test::Unit::TestCase
   end
   
   it "activates a project via a token" do
+    p = nil
     lambda do
       p = Project.activate_remote(42, @token)
       p.name.should == "RemoteFoo"
