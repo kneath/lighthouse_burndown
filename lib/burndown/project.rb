@@ -8,6 +8,7 @@ module Burndown
     property :active_since,   DateTime
     
     belongs_to :token
+    has n, :milestones
     
     # Calls the api to get projects for the token
     def self.for_token(token)
@@ -27,7 +28,17 @@ module Burndown
       p = Project.new(:name => result["name"], :remote_id => result["id"], :active_since => Time.now.utc)
       p.token = token
       p.save
+      p.create_starting_milestones!
+      p.save
       p
+    end
+    
+    # Asks the API for existing milestones and saves them for later use
+    def create_starting_milestones!
+      result = Lighthouse.get_milestones(self.remote_id, self.token.account, self.token.token)
+      (result["milestones"] || []).each do |milestone|
+        self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"])
+      end
     end
     
     def active?

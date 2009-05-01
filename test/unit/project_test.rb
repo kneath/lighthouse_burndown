@@ -26,6 +26,16 @@ class ProjectTest < Test::Unit::TestCase
         ]
       }
     }
+    
+    stub(Lighthouse).get_milestones{
+      {
+        "milestones" => [
+          {"name" => "FooMilestone",        "id" => "11"},
+          {"name" => "FooBarMilestone",     "id" => "22"},
+          {"name" => "FooBarBazMilestone",  "id" => "33"}
+        ]
+      }
+    }
   end
   
   it "activates a project via a token" do
