@@ -46,8 +46,14 @@ module Burndown
     
     post "/projects" do
       token = Token.get(params[:token_id])
-      Project.activate_remote(params[:project_remote_id], token)
+      Project.activate_remote(params[:project_remote_id], token, request.host)
       redirect "/setup"
+    end
+    
+    # handles 
+    post "/lighthouse_callbacks/:project_id/:secret_hash" do
+      project = Project.get(params[:project_id])
+      return unless project.secret_hash == params[:secret_hash]
     end
     
   end

@@ -6,6 +6,7 @@ module Burndown
     property :remote_id,      Integer,  :nullable => false
     property :name,           String,   :nullable => false
     property :active_since,   DateTime
+    property :secret_hash,    String
     
     belongs_to :token
     has n, :milestones
@@ -22,13 +23,14 @@ module Burndown
     end
     
     # Activates (starts tracking) a remote project
-    def self.activate_remote(remote_id, token)
+    def self.activate_remote(remote_id, token, host="example.com")
       result = Lighthouse.get_project(remote_id, token.account, token.token)
       result = result["project"]
       p = Project.new(:name => result["name"], :remote_id => result["id"], :active_since => Time.now.utc)
       p.token = token
       p.save
       p.create_starting_milestones!
+      p.create_callback!(host)
       p.save
       p
     end
@@ -40,6 +42,12 @@ module Burndown
         m = self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"], :activated_at => Time.now.utc)
         m.milestone_events.create(:who => "[pre-existing]", :ticket_change => milestone["open_tickets_count"])
       end
+    end
+    
+    # Creates a lighthouse callback
+    def create_callback!(host)
+      self.secret_hash = Digest::SHA1.hexdigest("lighthouse#{self.id}#{rand(10000)}callback")
+      Lighthouse.create_callback(self.id, "http://" + host + "/lighthouse_callbacks/#{self.id}/#{secret_hash}", self.token.account, self.token.token)
     end
     
     def active?
