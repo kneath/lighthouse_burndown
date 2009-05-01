@@ -35,12 +35,12 @@ class ProjectTest < Test::Unit::TestCase
       p.remote_id.should == 42
       p.should be_active
     end.should change(Project, :count).by(1)
+    p.destroy
   end
   
   it "finds activated projects in the mix with Project.for_token" do
     projects = Project.for_token(@token)
     projects.size.should == 4
-    puts projects[3].inspect
     projects.include?(@activated_project).should == true
   end
   
