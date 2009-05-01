@@ -8,10 +8,12 @@ module Burndown
     include Burndown::Helpers
     
     get "/" do
+      @projects = Project.all
       show :index
     end
     
-    get "/project" do
+    get "/project/:id" do
+      @project = Project.get(params[:id])
       show :project
     end
     

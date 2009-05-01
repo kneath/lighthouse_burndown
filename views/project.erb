@@ -1,9 +1,9 @@
 <% page_info :title => "Pick a Milestone",
-              :breadcrumb => [ link_to("Tender Support", "/") ] %>
+              :breadcrumb => [ link_to(@project.token.account, "/") ] %>
 
 <ul class="projects">
   <li>
-    <h3>Tender Support</h3>
+    <h3><%=h @project.name %></h3>
     <p>3 active burndowns</p>
     <ul class="milestones">
       <li>

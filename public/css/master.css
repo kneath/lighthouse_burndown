@@ -237,6 +237,10 @@ ul.projects li p{
 ul.projects li h3 a{
   display:block;
 }
+ul.projects li h3 a em{
+  font-style:normal;
+  color:#999;
+}
 
 ul.projects ul.milestones{
   border-top:1px solid #ddd;
