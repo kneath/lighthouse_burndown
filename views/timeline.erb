@@ -34,4 +34,10 @@
     </ul>
   </li>
   <% end %>
+  <li>
+    <h3><%= @milestone.start_date.strftime("%B %e") %></h3>
+    <ul class="events">
+      <li><strong>Started</strong> tracking milestone</li>
+    </ul>
+  </li>
 </ol>
