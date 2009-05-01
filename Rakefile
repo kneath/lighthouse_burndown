@@ -22,4 +22,8 @@ namespace :app do
     require "lib/burndown"
     Burndown.new(File.dirname(__FILE__) + "/config/config.yml")
   end
+  
+  task :update_milestones => :setup do
+    Burndown::Milestone.sync_with_lighthouse
+  end
 end

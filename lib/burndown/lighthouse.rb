@@ -27,6 +27,12 @@ module Burndown
       get "http://#{account}.#{lighthouse_host}/projects/#{remote_project_id}/milestones.xml", :headers => default_headers(token)
     end
     
+    def self.get_milestone_tickets(milestone_name, remote_project_id, account, token)
+      get "http://#{account}.#{lighthouse_host}/projects/#{remote_project_id}/tickets.xml", :query => {
+        :q => "milestone:'#{milestone_name}'"
+      }, :headers => default_headers(token)
+    end
+    
     def self.create_callback(project_id, url, account, token)
       post "http://#{account}.#{lighthouse_host}/callback_handlers.xml", :query => {:callback_handler =>{
         :project_id => project_id,

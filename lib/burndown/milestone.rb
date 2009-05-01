@@ -22,5 +22,19 @@ module Burndown
       Time.now.utc.to_datetime
     end
     
+     # Queries the API for each milestone (yikes!). Hope you don't have too many.
+    def self.sync_with_lighthouse
+      Milestone.all.each do |milestone|
+        milestone.sync_with_lighthouse
+      end
+    end
+    
+    # Syncs up the milestone with lighthouse updates
+    def sync_with_lighthouse
+      results = Lighthouse.get_milestone_tickets(self.name, self.project.remote_id, self.project.token.account, self.project.token.token)
+      ticket_ids = results["tickets"].collect{ |t| t["number"] }.join(",")
+      self.milestone_events.create(:open_tickets => ticket_ids)
+    end
+    
   end
 end

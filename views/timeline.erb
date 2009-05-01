@@ -28,7 +28,7 @@
     <h3><%= event.created_at.strftime("%B %e") %></h3>
     <span class="big"><%= "+" if event.ticket_change > 0 %><%= event.ticket_change %></span>
     <ul class="events">
-      <li><%=h event.who %> <strong><%= event.ticket_change > 0 ? "opened" : "closed" %></strong> <em class="<%= event.ticket_change > 0 ? "positive" : "negative" %>"><%= event.ticket_change %></em> tickets</li>
+      <li><strong><%= event.ticket_change > 0 ? "Opened" : "Closed" %></strong> <em class="<%= event.ticket_change > 0 ? "positive" : "negative" %>"><%= event.ticket_change %></em> tickets</li>
     </ul>
   </li>
   <% end %>

@@ -2,12 +2,27 @@ module Burndown
   class MilestoneEvent
     include DataMapper::Resource
     
-    property :id,             Serial
-    property :who,            String
-    property :ticket_change,  Integer
-    property :created_at,     DateTime
+    property :id,               Serial
+    property :open_tickets,     Text,   :default => "" # comma-separated ids: 1,2,3
+    property :created_on,       Date
     
     belongs_to :milestone
+    
+    def prev_record
+      @@prev_record ||= (self.class.first(:created_on.lt => self.created_on) || MilestoneEvent.new)
+    end
+    
+    def tickets_opened
+      @@tickets_opened ||= (self.open_tickets.split - prev_record.open_tickets.split).size
+    end
+    
+    def tickets_closed
+      @@tickets_closed ||= (prev_record.open_tickets.split - self.open_tickets.split).size
+    end
+    
+    def ticket_change
+      tickets_opened - tickets_closed
+    end
     
   end
 end

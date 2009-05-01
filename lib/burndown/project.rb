@@ -39,7 +39,7 @@ module Burndown
       result = Lighthouse.get_milestones(self.remote_id, self.token.account, self.token.token)
       (result["milestones"] || []).each do |milestone|
         m = self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"], :activated_at => Time.now.utc)
-        m.milestone_events.create(:who => "[pre-existing]", :ticket_change => milestone["open_tickets_count"])
+        m.sync_with_lighthouse
       end
     end
     
