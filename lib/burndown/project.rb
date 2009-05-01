@@ -38,8 +38,7 @@ module Burndown
     def create_starting_milestones!
       result = Lighthouse.get_milestones(self.remote_id, self.token.account, self.token.token)
       (result["milestones"] || []).each do |milestone|
-        m = self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"], :activated_at => Time.now.utc)
-        m.save
+        m = self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"], :activated_at => Time.now.utc, :due_on => milestone["due_on"])
         m.sync_with_lighthouse
       end
     end

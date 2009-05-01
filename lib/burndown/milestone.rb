@@ -7,7 +7,7 @@ module Burndown
     property :name,           String
     property :activated_at,   DateTime
     property :closed_at,      DateTime
-    property :due_date,       DateTime
+    property :due_on,         DateTime
     
     belongs_to :project
     has n, :milestone_events
@@ -18,7 +18,7 @@ module Burndown
     
     def end_date
       return closed_at if closed_at
-      return due_date if due_date
+      return due_on if due_on
       Time.now.utc.to_datetime
     end
     
