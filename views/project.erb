@@ -10,7 +10,7 @@
         <% @project.milestones.each do |milestone| %>
         <li>
           <h4><a href="/timeline"><%=h milestone.name %></a></h4>
-          <p>Due in 10 days</p>
+          <p>Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now.utc) %></p>
         </li>
         <% end %>
       </ul>
