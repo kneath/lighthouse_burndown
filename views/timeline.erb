@@ -25,7 +25,7 @@
 <ol class="timeline">
   <% @milestone.milestone_events.each do |event| %>
   <li>
-    <h3><%= event.created_at.strftime("%B %e") %></h3>
+    <h3><%= event.created_on.strftime("%B %e") %></h3>
     <span class="big"><%= "+" if event.ticket_change > 0 %><%= event.ticket_change %></span>
     <ul class="events">
       <li><strong><%= event.ticket_change > 0 ? "Opened" : "Closed" %></strong> <em class="<%= event.ticket_change > 0 ? "positive" : "negative" %>"><%= event.ticket_change %></em> tickets</li>

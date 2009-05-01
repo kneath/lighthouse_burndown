@@ -13,11 +13,11 @@ module Burndown
     end
     
     def tickets_opened
-      @@tickets_opened ||= (self.open_tickets.split - prev_record.open_tickets.split).size
+      @@tickets_opened ||= (self.open_tickets.split(',') - prev_record.open_tickets.split(',')).size
     end
     
     def tickets_closed
-      @@tickets_closed ||= (prev_record.open_tickets.split - self.open_tickets.split).size
+      @@tickets_closed ||= (prev_record.open_tickets.split(',') - self.open_tickets.split(',')).size
     end
     
     def ticket_change

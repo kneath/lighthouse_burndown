@@ -33,7 +33,13 @@ module Burndown
     def sync_with_lighthouse
       results = Lighthouse.get_milestone_tickets(self.name, self.project.remote_id, self.project.token.account, self.project.token.token)
       ticket_ids = results["tickets"].collect{ |t| t["number"] }.join(",")
-      self.milestone_events.create(:open_tickets => ticket_ids)
+
+      existing_event = self.milestone_events.first(:created_on.gte => Date.today)
+      if (existing_event)
+        existing_event.update_attributes(:open_tickets => ticket_ids)
+      else
+        self.milestone_events.create(:open_tickets => ticket_ids)
+      end
     end
     
   end
