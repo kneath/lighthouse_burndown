@@ -29,6 +29,8 @@ module Burndown
     elsif config.is_a?(Hash)
       self.config = config
     end
+    
+    self.config[:demo_mode] = ENV['DEMO_MODE'] || self.config[:demo_mode]
 
     DataMapper.setup(:default, ENV['DATABASE_URL'] || self.config[:database_uri])
     DataMapper.auto_upgrade!
@@ -39,6 +41,7 @@ module Burndown
                     :log               => STDOUT,
                     :base_uri          => "http://localhost:8910",
                     :lighthouse_host   => "lighthouseapp.com",
+                    :demo_mode         => false,
                     :log_debug_info    => false }
   end
 

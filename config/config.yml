@@ -14,3 +14,6 @@
 :log: /var/log/burndown.log
 
 :lighthouse_host: lighthouseapp.com
+
+# This disables all setup pages
+:demo_mode: false

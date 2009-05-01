@@ -37,6 +37,8 @@ module Burndown
     
     # Creates a new token (AJAX method)
     post "/tokens" do
+      return if Burndown.config[:demo_mode]
+      
       @token = Token.new(params[:token])
       @token.set_data
       if @token.save
@@ -47,6 +49,8 @@ module Burndown
     end
     
     post "/projects" do
+      return if Burndown.config[:demo_mode]
+      
       token = Token.get(params[:token_id])
       Project.activate_remote(params[:project_remote_id], token, request.host)
       redirect "/setup"

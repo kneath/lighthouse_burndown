@@ -2,63 +2,68 @@
 
 <p class="overview">Burndown works with <a href="http://help.lighthouseapp.com/faqs/api/how-do-i-get-an-api-token" target="_blank">Lighthouse Tokens</a> to set up your Burndown charts. You'll only need a read-only token to activate Burndown.</p>
 
-<div class="tab-group setup clearfix">
-  <ul class="tabs">
-    <% @tokens.each do |token| %>
-      <li>
-        <a href="#token_<%= "#{token.account}_#{token.token}" %>"><%=h token.note %> <em><%=h token.account %>.lighthouseapp.com</em></a>
-      </li>
-    <% end %>
-    <li>
-      <a href="#new_token">+ Add a token</a>
-    </li>
-  </ul>
 
-  <% @tokens.each do |token| %>
-    <div id="token_<%= "#{token.account}_#{token.token}" %>" class="tab-content">
-      <div class="title">
-        <span class="accesslevel"><%= token.read_write %></span>
-        <h2><%=h token.account %>.<%= Burndown.config[:lighthouse_host] %></h2>
-        <p><%= token.token %></p>
-      </div>
-      
-      <% Burndown::Project.for_token(token).each do |project| %>
-        <div class="project <%= project.active? ? 'active' : 'inactive' %>">
-          <span class="state">
-            <% if project.active? %>
-              Active &ndash; <a href="#">Deactivate</a>
-            <% else %>
-              <form action="/projects" method="post" id="activate_form_<%= project.remote_id %>_<%= token.token %>">
-                <input type="hidden" name="project_remote_id" value="<%= project.remote_id %>" />
-                <input type="hidden" name="token_id" value="<%= token.id %>" />
-              </form>
-              Inactive &ndash; <a href="#" onclick="$('#activate_form_<%= project.remote_id %>_<%= token.token %>').submit(); return false">Activate</a>
-            <% end %>
-          </span>
-          <h3><%=h project.name %></h3>
-        </div>
+<% if Burndown.config[:demo_mode] %>
+  <p class="message error">This installation is currently in demo mode, which means the setup page has been disabled.</p>
+<% else %>
+  <div class="tab-group setup clearfix">
+    <ul class="tabs">
+      <% @tokens.each do |token| %>
+        <li>
+          <a href="#token_<%= "#{token.account}_#{token.token}" %>"><%=h token.note %> <em><%=h token.account %>.lighthouseapp.com</em></a>
+        </li>
       <% end %>
-    </div><!-- /.tab-content -->
-  <% end %>
-  <div id="new_token" class="tab-content">
-    <div class="title">
-      <h2>Add a new token</h2>
-      <p>You can manage your Lighthouse tokens by clicking your name in the upper right, then bottom right sidebar.</p>
-      <div class="form">
-        <form action="/token" method="post" id="token_form">
-          <p class="message" style="display:none"></p>
-          
-          <p><input type="text" name="token[account]" class="short" placeholder="foo" /> .lighthouseapp.com</p>
-          <p><input type="text" name="token[token]" placeholder="Token" /></p>
-          <ul class="form-actions">
-            <li><button type="submit">Check Token Validity</button></li>
-          </ul>
-          
-          <div class="loader" style="display:none">
-            Checking token validity...
+      <li>
+        <a href="#new_token">+ Add a token</a>
+      </li>
+    </ul>
+
+    <% @tokens.each do |token| %>
+      <div id="token_<%= "#{token.account}_#{token.token}" %>" class="tab-content">
+        <div class="title">
+          <span class="accesslevel"><%= token.read_write %></span>
+          <h2><%=h token.account %>.<%= Burndown.config[:lighthouse_host] %></h2>
+          <p><%= token.token %></p>
+        </div>
+      
+        <% Burndown::Project.for_token(token).each do |project| %>
+          <div class="project <%= project.active? ? 'active' : 'inactive' %>">
+            <span class="state">
+              <% if project.active? %>
+                Active &ndash; <a href="#">Deactivate</a>
+              <% else %>
+                <form action="/projects" method="post" id="activate_form_<%= project.remote_id %>_<%= token.token %>">
+                  <input type="hidden" name="project_remote_id" value="<%= project.remote_id %>" />
+                  <input type="hidden" name="token_id" value="<%= token.id %>" />
+                </form>
+                Inactive &ndash; <a href="#" onclick="$('#activate_form_<%= project.remote_id %>_<%= token.token %>').submit(); return false">Activate</a>
+              <% end %>
+            </span>
+            <h3><%=h project.name %></h3>
           </div>
-        </form>
+        <% end %>
+      </div><!-- /.tab-content -->
+    <% end %>
+    <div id="new_token" class="tab-content">
+      <div class="title">
+        <h2>Add a new token</h2>
+        <p>You can manage your Lighthouse tokens by clicking your name in the upper right, then bottom right sidebar.</p>
+        <div class="form">
+          <form action="/token" method="post" id="token_form">
+            <p class="message" style="display:none"></p>
+          
+            <p><input type="text" name="token[account]" class="short" placeholder="foo" /> .lighthouseapp.com</p>
+            <p><input type="text" name="token[token]" placeholder="Token" /></p>
+            <ul class="form-actions">
+              <li><button type="submit">Check Token Validity</button></li>
+            </ul>
+          
+            <div class="loader" style="display:none">
+              Checking token validity...
+            </div>
+          </form>
+        </div>
       </div>
     </div>
-  </div>
-</div><!-- /.tab-group -->
+  </div><!-- /.tab-group -->
+<% end %>

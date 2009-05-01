@@ -471,12 +471,12 @@ ul.form-actions button{
   background:#990000;
 }
 
-#token_form .message{
+.message{
   font-weight:bold;
   font-size:12px;
   color:#000;
 }
-#token_form .message.error{
+.message.error{
   color:#990000;
 }
 
