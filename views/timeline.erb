@@ -23,7 +23,7 @@
 </div>
 
 <ol class="timeline">
-  <% @milestone.milestone_events.each do |event| %>
+  <% @timeline_events.each do |event| %>
   <li>
     <h3><%= event.created_on.strftime("%B %e") %></h3>
     <span class="big"><%= "+" if event.ticket_change > 0 %><%= event.ticket_change %></span>

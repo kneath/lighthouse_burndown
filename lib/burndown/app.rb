@@ -19,6 +19,7 @@ module Burndown
     
     get "/timeline/:id" do
       @milestone = Milestone.get(params[:id])
+      @timeline_events = @milestone.milestone_events(:order => [:created_on.desc])
       show :timeline
     end
     
