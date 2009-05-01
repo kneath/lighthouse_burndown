@@ -44,7 +44,9 @@ module Burndown
     end
     
     post "/projects" do
-      
+      token = Token.get(params[:token_id])
+      Project.activate_remote(params[:project_remote_id], token)
+      redirect "/setup"
     end
     
   end

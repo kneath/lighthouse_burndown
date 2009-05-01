@@ -28,7 +28,11 @@
             <% if project.active? %>
               Active &ndash; <a href="#">Deactivate</a>
             <% else %>
-              Inactive &ndash; <a href="#">Activate</a>
+              <form action="/projects" method="post" id="activate_form_<%= project.remote_id %>_<%= token.token %>">
+                <input type="hidden" name="project_remote_id" value="<%= project.remote_id %>" />
+                <input type="hidden" name="token_id" value="<%= token.id %>" />
+              </form>
+              Inactive &ndash; <a href="#" onclick="$('#activate_form_<%= project.remote_id %>_<%= token.token %>').submit(); return false">Activate</a>
             <% end %>
           </span>
           <h3><%=h project.name %></h3>
