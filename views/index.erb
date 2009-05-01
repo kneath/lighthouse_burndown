@@ -5,7 +5,7 @@
     <% @projects.each do |project| %>
       <li>
         <h3><a href="/project/<%= project.id %>"><em><%=h project.token.account %> / </em><%=h project.name %></a></h3>
-        <p>3 active burndowns</p>
+        <p><%= project.milestones.count %> active burndown<%= 's' unless project.milestones.count == 1 %></p>
       </li>
     <% end %>
   </ul>

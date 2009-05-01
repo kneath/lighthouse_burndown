@@ -4,20 +4,18 @@
 <ul class="projects">
   <li>
     <h3><%=h @project.name %></h3>
-    <p>3 active burndowns</p>
-    <ul class="milestones">
-      <li>
-        <h4><a href="/timeline">May Release</a></h4>
-        <p>Due in 10 days</p>
-      </li>
-      <li>
-        <h4><a href="/timeline">May Release</a></h4>
-        <p>Due in 10 days</p>
-      </li>
-      <li>
-        <h4><a href="/timeline">May Release</a></h4>
-        <p>Due in 10 days</p>
-      </li>
-    </ul>
+    <p><%= @project.milestones.size %> active burndown<%= 's' unless @project.milestones.size == 1 %></p>
+    <% if @project.milestones.any? %>
+      <ul class="milestones">
+        <% @project.milestones.each do |milestone| %>
+        <li>
+          <h4><a href="/timeline"><%=h milestone.name %></a></h4>
+          <p>Due in 10 days</p>
+        </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>You don't have any milestones setup, so you can't use burndown charts!</p>
+    <% end %>
   </li>
 </ul>
