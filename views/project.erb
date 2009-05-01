@@ -1,16 +1,28 @@
 <% page_info :title => "Pick a Milestone",
               :breadcrumb => [ link_to(h(@project.name), "/") ] %>
 
+<% @closed_milestones = [] %>
 <ul class="projects">
   <li>
     <h3><%=h @project.name %></h3>
-    <p><%= @project.milestones.size %> active burndown<%= 's' unless @project.milestones.size == 1 %></p>
-    <% if @project.milestones.any? %>
+    <p><%= @milestones.size %> active burndown<%= 's' unless @milestones.size == 1 %></p>
+    <% if @milestones.any? %>
       <ul class="milestones">
-        <% @project.milestones.each do |milestone| %>
+        <% @milestones.each do |milestone| %>
+        <%
+          if !milestone.active?
+            @closed_milestones.push(milestone)
+            next
+          end
+        %>
         <li>
           <h4><a href="/timeline/<%= milestone.id %>"><%=h milestone.name %></a></h4>
-          <p>Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now) %></p>
+          <p>
+            Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now) %>.
+            <% if milestone.due_on %>
+              Due in <%= distance_of_time_in_words(milestone.due_on, Time.now) %>.
+            <% end %>
+          </p>
         </li>
         <% end %>
       </ul>
@@ -18,4 +30,26 @@
       <p>You don't have any milestones setup, so you can't use burndown charts!</p>
     <% end %>
   </li>
+  <% if @closed_milestones.any? %>
+  <li>
+    <h3>Closed / Past-Due Milestones</h3>
+    <ul class="milestones">
+      <% @closed_milestones.each do |milestone| %>
+      <li>
+        <h4><a href="/timeline/<%= milestone.id %>"><%=h milestone.name %></a></h4>
+        <% if milestone.active? %>
+          <p>
+            Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now) %>.
+            <% if milestone.due_on %>
+              Due in <%= distance_of_time_in_words(milestone.due_on, Time.now) %>.
+            <% end %>
+          </p>
+        <% else %>
+          <p>Inactive!</p>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
 </ul>

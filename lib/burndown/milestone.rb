@@ -22,6 +22,10 @@ module Burndown
       Time.now.to_datetime
     end
     
+    def active?
+      !((due_on && due_on < Time.now.to_datetime) || (closed_at && closed_at < Time.now.to_datetime))
+    end
+    
      # Queries the API for each milestone (yikes!). Hope you don't have too many.
     def self.sync_with_lighthouse
       Milestone.all.each do |milestone|
