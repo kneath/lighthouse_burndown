@@ -22,7 +22,7 @@ class ProjectTest < Test::Unit::TestCase
           { "name" => "RemoteFoo",   "id" => "42" },
           { "name" => "RemoteFoo22", "id" => "22" },
           { "name" => "RemoteFoo33", "id" => "33" },
-          { "name" => @activated_project.name, :id => @activated_project.remote_id.to_s }
+          { "name" => @activated_project.name, "id" => @activated_project.remote_id.to_s }
         ]
       }
     }
