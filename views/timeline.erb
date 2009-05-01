@@ -13,7 +13,7 @@
     <tbody>
       <tr>
         <% day_event = nil %>
-        <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
+        <% segmented_range(@milestone.start_date, @milestone.end_date, :segments => 15) do |day| %>
           <% old_event = day_event || Burndown::MilestoneEvent.new %>
           <td><%= (day_event = @timeline_events.select{ |e| e.created_on.strftime("%B %e") == day.strftime("%B %e") }[0]) ? day_event.num_tickets_open : old_event.num_tickets_open %></td>
         <% end %>
