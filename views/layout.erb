@@ -17,12 +17,12 @@
     <script src="/js/modules/burndown.token_form.js" type="text/javascript" charset="utf-8"></script>
     <script src="/js/application.js" type="text/javascript" charset="utf-8"></script>
   </head>
-  <body>
+  <body id="<%= @page_id %>">
     <div id="superheader">
       <ul id="nav">
-        <li><a href="/">My Projects</a></li>
-        <li><a href="/timeline" class="selected">Timeline &amp; Graph</a></li>
-        <li><a href="/setup">Setup</a></li>
+        <li class="home"><a href="/">My Projects</a></li>
+        <li class="default"><a href="/timeline">Timeline &amp; Graph</a></li>
+        <li class="setup"><a href="/setup">Setup</a></li>
       </ul>
       <p class="welcome">
         <strong class="miniapp">Burndown</strong>

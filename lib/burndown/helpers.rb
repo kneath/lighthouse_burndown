@@ -12,9 +12,10 @@ module Burndown
       %(<a href="#{url}">#{h(title)}</a>)
     end
     
-    def page_info(options)
-      @title = options[:title] if options[:title]
-      @breadcrumb = options[:breadcrumb] if options[:breadcrumb]
+    def page_info(options={})
+      @title = options[:title]
+      @breadcrumb = options[:breadcrumb]
+      @page_id = options[:id]
     end
     
     def segmented_range(start_date, end_date, options = {}, &block)
