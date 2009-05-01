@@ -13,7 +13,7 @@ module Burndown
     def self.for_token(token)
       result = Lighthouse.get_projects(token.account, token.token)
       arr = []
-      result["projects"].each do |project|
+      (result["projects"] ||[]).each do |project|
         arr.push(Project.new(:name => project["name"]))
       end
       arr

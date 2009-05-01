@@ -18,7 +18,7 @@
     <div id="token_<%= "#{token.account}_#{token.token}" %>" class="tab-content">
       <div class="title">
         <span class="accesslevel"><%= token.read_write %></span>
-        <h2><%=h token.account %>.lighthouseapp.com</h2>
+        <h2><%=h token.account %>.<%= Burndown.config[:lighthouse_host] %></h2>
         <p><%= token.token %></p>
       </div>
       
