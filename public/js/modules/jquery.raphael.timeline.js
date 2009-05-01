@@ -18,7 +18,7 @@ jQuery.fn.timelineGraph = function(){
     });
     
     // Prepare variables for drawing
-    var width = 790, height = 250, leftgutter = 0, rightgutter = 0, topgutter = 15, bottomgutter = 25;
+    var width = 790, height = 250, leftgutter = 0, rightgutter = 0, topgutter = 20, bottomgutter = 25;
     var colorhue = 0.75, color = "#ffb240";
     var r = Raphael("holder", width, height);
     var txt =  {"font": '12px "Helvetica"', "font-weight": "bold", stroke: 'none', fill: '#000'},
