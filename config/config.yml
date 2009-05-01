@@ -13,4 +13,4 @@
 # Path to the burndown log file
 :log: /var/log/burndown.log
 
-:lighthouse_host: local.i
+:lighthouse_host: lighthouseapp.com
