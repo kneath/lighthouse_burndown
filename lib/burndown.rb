@@ -18,6 +18,7 @@ require "burndown/helpers"
 require "burndown/lighthouse"
 require "burndown/project"
 require "burndown/milestone"
+require "burndown/milestone_event"
 require "burndown/token"
 require "burndown/app"
 

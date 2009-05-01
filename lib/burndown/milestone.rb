@@ -10,6 +10,7 @@ module Burndown
     property :due_date,       DateTime
     
     belongs_to :project
+    has n, :milestone_events
     
     def start_date
       activated_at
