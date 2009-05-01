@@ -30,7 +30,6 @@ module Burndown
       p.token = token
       p.save
       p.create_starting_milestones!
-      p.create_callback!(host)
       p.save
       p
     end

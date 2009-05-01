@@ -50,11 +50,5 @@ module Burndown
       redirect "/setup"
     end
     
-    # handles 
-    post "/lighthouse_callbacks/:project_id/:secret_hash" do
-      project = Project.get(params[:project_id])
-      return unless project.secret_hash == params[:secret_hash]
-    end
-    
   end
 end
