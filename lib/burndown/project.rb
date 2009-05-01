@@ -14,7 +14,8 @@ module Burndown
       result = Lighthouse.get_projects(token.account, token.token)
       arr = []
       (result["projects"] ||[]).each do |project|
-        arr.push(Project.new(:name => project["name"], :remote_id => project["id"]))
+        p = Project.first(:remote_id => project["id"].to_i) || Project.new(:name => project["name"], :remote_id => project["id"])
+        arr.push(p)
       end
       arr
     end
@@ -30,7 +31,7 @@ module Burndown
     end
     
     def active?
-      active_since && active_since < Time.now.utc
+      active_since && active_since <= Time.now.utc.to_datetime
     end
   end
 end
