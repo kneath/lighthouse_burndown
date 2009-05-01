@@ -1,5 +1,5 @@
 task :cron => :environment do
-  if Time.now.hour == 0
+  if Time.now.hour == 5
     puts "Updating milestones..."
     Burndown::Milestone.sync_with_lighthouse
     puts "done."
