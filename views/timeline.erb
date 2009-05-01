@@ -12,9 +12,10 @@
     </tfoot>
     <tbody>
       <tr>
-        <% value = 15*3 %>
+        <% day_event = nil %>
         <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
-          <td><%= value = value - rand(5) %></td>
+          <% old_event = day_event || Burndown::MilestoneEvent.new %>
+          <td><%= (day_event = @timeline_events.select{ |e| e.created_on.strftime("%B %e") == day.strftime("%B %e") }[0]) ? day_event.num_tickets_open : old_event.num_tickets_open %></td>
         <% end %>
       </tr>
     </tbody>
@@ -28,7 +29,15 @@
     <h3><%= event.created_on.strftime("%B %e") %></h3>
     <span class="big"><%= "+" if event.ticket_change > 0 %><%= event.ticket_change %></span>
     <ul class="events">
-      <li><strong><%= event.ticket_change > 0 ? "Opened" : "Closed" %></strong> <em class="<%= event.ticket_change > 0 ? "positive" : "negative" %>"><%= event.ticket_change %></em> tickets</li>
+      <% if event.tickets_opened > 0 %>
+        <li><strong>Opened</strong> <em class="positive"><%= event.tickets_opened %></em> tickets</li>
+      <% end %>
+      <% if event.tickets_closed > 0 %>
+        <li><strong>Closed</strong> <em class="negative"><%= event.tickets_closed %></em> tickets</li>
+      <% end %>
+      <% if event.tickets_opened == 0 && event.tickets_closed == 0 %>
+        <li><strong>No changes</strong></li>
+      <% end %>
     </ul>
   </li>
   <% end %>
