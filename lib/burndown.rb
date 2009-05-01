@@ -35,7 +35,7 @@ module Burndown
   end
   
   def self.default_configuration
-    @defaults ||= { :database_uri      => "sqlite3::memory:"    
+    @defaults ||= { :database_uri      => "sqlite3::memory:",
                     :log               => STDOUT,
                     :base_uri          => "http://localhost:8910",
                     :lighthouse_host   => "lighthouseapp.com",
