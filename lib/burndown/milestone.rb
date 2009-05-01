@@ -19,7 +19,7 @@ module Burndown
     def end_date
       return closed_at if closed_at
       return due_on if due_on
-      Time.now.utc.to_datetime
+      Time.now.to_datetime
     end
     
      # Queries the API for each milestone (yikes!). Hope you don't have too many.

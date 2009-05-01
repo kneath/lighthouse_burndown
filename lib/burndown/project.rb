@@ -26,7 +26,7 @@ module Burndown
     def self.activate_remote(remote_id, token, host="example.com")
       result = Lighthouse.get_project(remote_id, token.account, token.token)
       result = result["project"]
-      p = Project.new(:name => result["name"], :remote_id => result["id"], :active_since => Time.now.utc)
+      p = Project.new(:name => result["name"], :remote_id => result["id"], :active_since => Time.now)
       p.token = token
       p.save
       p.create_starting_milestones!
@@ -38,7 +38,7 @@ module Burndown
     def create_starting_milestones!
       result = Lighthouse.get_milestones(self.remote_id, self.token.account, self.token.token)
       (result["milestones"] || []).each do |milestone|
-        m = self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"], :activated_at => Time.now.utc, :due_on => milestone["due_on"])
+        m = self.milestones.create(:name => milestone["title"], :remote_id => milestone["id"], :activated_at => Time.now, :due_on => milestone["due_on"])
       end
     end
     
@@ -49,7 +49,7 @@ module Burndown
     end
     
     def active?
-      active_since && active_since <= Time.now.utc.to_datetime
+      active_since && active_since <= Time.now.to_datetime
     end
   end
 end
