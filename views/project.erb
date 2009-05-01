@@ -9,7 +9,7 @@
       <ul class="milestones">
         <% @project.milestones.each do |milestone| %>
         <li>
-          <h4><a href="/timeline"><%=h milestone.name %></a></h4>
+          <h4><a href="/timeline/<%= milestone.id %>"><%=h milestone.name %></a></h4>
           <p>Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now.utc) %></p>
         </li>
         <% end %>

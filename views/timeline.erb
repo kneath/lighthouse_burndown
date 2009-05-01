@@ -1,11 +1,11 @@
 <% page_info :title => "Timeline &amp; Graph",
-              :breadcrumb => [ link_to("Tender Support", "/"), link_to("May Release", "/project") ] %>
+              :breadcrumb => [ link_to(h(@milestone.project.name), "/"), link_to(h(@milestone.name), "/project/#{@milestone.project.id}") ] %>
 
 <div class="graph">
   <table class="timeline">
     <tfoot>
       <tr>
-        <% segmented_range(@start_date, @due_date, :segments => 15) do |day| %>
+        <% segmented_range(@milestone.start_date, @milestone.end_date, :segments => 15) do |day| %>
           <th><%= day.strftime("%m/%d") %></th>
         <% end %>
       </tr>
@@ -13,7 +13,7 @@
     <tbody>
       <tr>
         <% value = 15*3 %>
-        <% @start_date.upto(@due_date) do |day| %>
+        <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
           <td><%= value = value - rand(5) %></td>
         <% end %>
       </tr>

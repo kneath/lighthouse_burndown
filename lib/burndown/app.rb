@@ -17,9 +17,8 @@ module Burndown
       show :project
     end
     
-    get "/timeline" do
-      @start_date = Date.new(2009, 3, 8)
-      @due_date = Date.new(2009, 4, 30)
+    get "/timeline/:id" do
+      @milestone = Milestone.get(params[:id])
       show :timeline
     end
     
