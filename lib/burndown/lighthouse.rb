@@ -28,8 +28,7 @@ module Burndown
     end
     
     def self.get_milestone(remote_milestone_id, remote_project_id, account, token)
-      puts "http://#{account}.#{lighthouse_host}/projects/#{remote_project_id}/milestone/#{remote_milestone_id}.xml"
-      get "http://#{account}.#{lighthouse_host}/projects/#{remote_project_id}/milestone/#{remote_milestone_id}.xml", :headers => default_headers(token)
+      get "http://#{account}.#{lighthouse_host}/projects/#{remote_project_id}/milestones/#{remote_milestone_id}.xml", :headers => default_headers(token)
     end
     
     def self.get_milestone_tickets(milestone_name, remote_project_id, account, token)
