@@ -24,8 +24,14 @@ module Burndown
       [due, closed].max
     end
     
+    def past_due?
+      due_on && due_on < Time.now.to_datetime
+    end
+    
     def active?
-      !((due_on && due_on < Time.now.to_datetime) || (closed_at && closed_at < Time.now.to_datetime))
+      return true if open_tickets_count > 0
+      return true if due_on && !past_due?
+      return false
     end
     
      # Queries the API for each milestone (yikes!). Hope you don't have too many.

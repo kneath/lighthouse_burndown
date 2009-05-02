@@ -52,4 +52,28 @@ class MiilestoneTest < Test::Unit::TestCase
     m = Milestone.make(:closed_at => nil, :due_on => nil)
     m.end_date.strftime("%m/%d/%y").should == Time.now.to_datetime.strftime("%m/%d/%y")
   end
+  
+  it "is marked active when there are open tickets and it has previously been closed" do
+    m = Milestone.make(:open_tickets_count => 5, :closed_at => DateTime.new(2008, 04, 06))
+    m.should be_active
+  end
+  
+  it "is marked active when there are open tickets has the due date has been passed" do
+    m = Milestone.make(:open_tickets_count => 5, :due_on => DateTime.new(2008, 04, 06))
+    m.should be_active
+  end
+  
+  it "is marked active if all tickets are closed and it's due at a later time" do
+    m = Milestone.make(:open_tickets_count => 0, :due_on => DateTime.new(2020, 04, 06))
+    m.should be_active
+  end
+  
+  it "is marked inactive if all tickets are closed" do
+    m = Milestone.make(:open_tickets_count => 0, :due_on => DateTime.new(2008, 04, 06))
+    m.should_not be_active
+    
+    m2 = Milestone.make(:open_tickets_count => 0, :due_on => nil)
+    m2.should_not be_active
+  end
+  
 end
