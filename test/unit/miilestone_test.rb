@@ -77,20 +77,20 @@ class MiilestoneTest < Test::Unit::TestCase
   end
   
   context "lighthouse syncing" do
-    before(:all) do
-      @existing = Milestone.generate(:remote_id => 42, :tickets_count => 20, :open_tickets_count => 10, :name => "ExistingMilestone", :due_on => DateTime.new(2006, 06, 06), :project_id => @activated_project.id)
-    end
     
     before(:each) do
+      @existing = Milestone.generate(:remote_id => 42, :tickets_count => 20, :open_tickets_count => 10, :name => "ExistingMilestone", :due_on => DateTime.new(2006, 06, 06), :project_id => @activated_project.id)
+      
+      @milestone_update_hash = {
+        "title" => "ExistingMilestoneUpdated",
+        "id" => "42",
+        "tickets_count" => "30",
+        "open_tickets_count" => "5",
+        "due_on" => "2007-07-07T20:00:00Z"
+      }
       stub(Lighthouse).get_milestone{
         {
-          "milestone" => {
-            "title" => "ExistingMilestoneUpdated",
-            "id" => "42",
-            "tickets_count" => "30",
-            "open_tickets_count" => "5",
-            "due_on" => "2007-07-07T20:00:00Z"
-          }
+          "milestone" => @milestone_update_hash
         }
       }
     end
@@ -108,6 +108,21 @@ class MiilestoneTest < Test::Unit::TestCase
       @existing.tickets_count.should == 30
       @existing.due_on.strftime("%m/%d/%y").should == "07/07/07"
     end
+    
+    it "closes the milstone if all open tickets have been closed and the due date is past" do
+      stub(Lighthouse).get_milestone{
+        { "milestone" => @milestone_update_hash.merge({"open_tickets_count" => 0}) }
+      }
+      @existing.should be_active
+      @existing.closed_at.should be_nil
+      
+      @existing.sync_with_lighthouse
+      
+      @existing.should_not be_active
+      @existing.closed_at.should_not be_nil
+    end
+    
+    it "reopenes the milestone if there are open tickets"
   end
   
 end
