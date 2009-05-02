@@ -122,7 +122,16 @@ class MiilestoneTest < Test::Unit::TestCase
       @existing.closed_at.should_not be_nil
     end
     
-    it "reopenes the milestone if there are open tickets"
+    it "reopenes the milestone if there are open tickets" do
+      closed = Milestone.generate(:remote_id => 42, :tickets_count => 20, :open_tickets_count => 0, :name => "ClosedMilestone", :due_on => DateTime.new(2006, 06, 06), :project_id => @activated_project.id, :closed_at => DateTime.new(2006, 07, 07))
+      closed.should_not be_active
+      closed.closed_at.should_not be_nil
+      
+      closed.sync_with_lighthouse
+      
+      closed.should be_active
+      closed.closed_at.should be_nil
+    end
   end
   
 end

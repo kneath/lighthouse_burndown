@@ -49,6 +49,8 @@ module Burndown
       if !self.active?
         self.update_attributes(:closed_at => Time.now)
         return true
+      else
+        self.update_attributes(:closed_at => nil) if !self.closed_at.nil?
       end
       
       results = Lighthouse.get_milestone_tickets(self.name, self.project.remote_id, self.project.token.account, self.project.token.token)
