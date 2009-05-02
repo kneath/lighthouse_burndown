@@ -19,9 +19,9 @@ module Burndown
     end
     
     def end_date
-      return closed_at if closed_at
-      return due_on if due_on
-      Time.now.to_datetime
+      due = due_on || Time.now.to_datetime
+      closed = closed_at || Time.now.to_datetime
+      [due, closed].max
     end
     
     def active?

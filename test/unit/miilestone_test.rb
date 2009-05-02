@@ -38,4 +38,18 @@ class MiilestoneTest < Test::Unit::TestCase
     @milestone.start_date.to_s.should == "2001-01-01T00:00:00+00:00"
   end
   
+  it "knows the end date when a milestone has been closed" do
+    m = Milestone.make(:closed_at => DateTime.new(2008, 05, 06), :due_on => DateTime.new(2008, 04, 06))
+    m.end_date.should == DateTime.new(2008, 05, 06)
+  end
+  
+  it "knows the end date when a milestone is due" do
+    m = Milestone.make(:closed_at => DateTime.new(2008, 04, 06), :due_on => DateTime.new(2008, 05, 06))
+    m.end_date.strftime("%m/%d/%y").should == DateTime.new(2008, 05, 06).strftime("%m/%d/%y")
+  end
+  
+  it "knows the end date when not much is known" do
+    m = Milestone.make(:closed_at => nil, :due_on => nil)
+    m.end_date.strftime("%m/%d/%y").should == Time.now.to_datetime.strftime("%m/%d/%y")
+  end
 end
