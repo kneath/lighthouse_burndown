@@ -48,7 +48,6 @@ module Burndown
       self.update_attributes(:name => milestone["title"], :due_on => milestone["due_on"], :tickets_count => milestone["tickets_count"], :open_tickets_count => milestone["open_tickets_count"])
       if !self.active?
         self.update_attributes(:closed_at => Time.now)
-        return true
       else
         self.update_attributes(:closed_at => nil) if !self.closed_at.nil?
       end
