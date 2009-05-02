@@ -76,4 +76,38 @@ class MiilestoneTest < Test::Unit::TestCase
     m2.should_not be_active
   end
   
+  context "lighthouse syncing" do
+    before(:all) do
+      @existing = Milestone.generate(:remote_id => 42, :tickets_count => 20, :open_tickets_count => 10, :name => "ExistingMilestone", :due_on => DateTime.new(2006, 06, 06), :project_id => @activated_project.id)
+    end
+    
+    before(:each) do
+      stub(Lighthouse).get_milestone{
+        {
+          "milestone" => {
+            "title" => "ExistingMilestoneUpdated",
+            "id" => "42",
+            "tickets_count" => "30",
+            "open_tickets_count" => "5",
+            "due_on" => "2007-07-07T20:00:00Z"
+          }
+        }
+      }
+    end
+    
+    it "updates the name, open ticket count, ticket count, and due_on" do
+      @existing.name.should == "ExistingMilestone"
+      @existing.open_tickets_count.should == 10
+      @existing.tickets_count.should == 20
+      @existing.due_on.strftime("%m/%d/%y").should == "06/06/06"
+      
+      @existing.sync_with_lighthouse
+      
+      @existing.name.should == "ExistingMilestoneUpdated"
+      @existing.open_tickets_count.should == 5
+      @existing.tickets_count.should == 30
+      @existing.due_on.strftime("%m/%d/%y").should == "07/07/07"
+    end
+  end
+  
 end

@@ -43,6 +43,10 @@ module Burndown
     
     # Syncs up the milestone with lighthouse updates
     def sync_with_lighthouse
+      results = Lighthouse.get_milestone(self.remote_id, self.project.remote_id, self.project.token.account, self.project.token.token)
+      return false unless milestone = results["milestone"]
+      self.update_attributes(:name => milestone["title"], :due_on => milestone["due_on"], :tickets_count => milestone["tickets_count"], :open_tickets_count => milestone["open_tickets_count"])
+      
       results = Lighthouse.get_milestone_tickets(self.name, self.project.remote_id, self.project.token.account, self.project.token.token)
       ticket_ids = results["tickets"] ? results["tickets"].collect{ |t| t["number"] }.join(",") : ""
 
