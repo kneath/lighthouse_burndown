@@ -2,12 +2,14 @@ module Burndown
   class Milestone
     include DataMapper::Resource
     
-    property :id,             Serial
-    property :remote_id,      Integer,  :nullable => false
-    property :name,           String
-    property :activated_at,   DateTime
-    property :closed_at,      DateTime
-    property :due_on,         DateTime
+    property :id,                   Serial
+    property :remote_id,            Integer,  :nullable => false
+    property :name,                 String
+    property :activated_at,         DateTime
+    property :closed_at,            DateTime
+    property :due_on,               DateTime
+    property :tickets_count,        Integer, :default => 0
+    property :open_tickets_count,   Integer, :default => 0
     
     belongs_to :project
     has n, :milestone_events
