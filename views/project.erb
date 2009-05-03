@@ -19,9 +19,10 @@
           <h4><a href="/timeline/<%= milestone.id %>" class="<%= 'past_due' if milestone.past_due? %>"><%=h milestone.name %></a></h4>
           <p>
             Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now) %>.
-            <% if milestone.due_on %>
+            <% if milestone.due_on && !milestone.past_due? %>
               Due in <%= distance_of_time_in_words(milestone.due_on, Time.now) %>.
             <% end %>
+            <% if milestone.past_due? %><span class="past_due">Late by <%= distance_of_time_in_words(milestone.due_on, Time.now) %></span><% end %>
           </p>
         </li>
         <% end %>

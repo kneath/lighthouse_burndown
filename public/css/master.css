@@ -256,7 +256,7 @@ ul.projects ul.milestones h4{
   margin:0;
   font-size:14px;
 }
-ul.projects ul.milestones h4 a.past_due{
+ul.projects ul.milestones h4 a.past_due, .past_due{
   color:#860000;
 }
 
