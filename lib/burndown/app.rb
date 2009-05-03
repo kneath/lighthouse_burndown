@@ -14,7 +14,9 @@ module Burndown
     
     get "/project/:id" do
       @project = Project.get(params[:id])
-      @milestones = @project.milestones.all(:order => [:due_on.asc]).sort { |x, y| !x.due_on ? 1 : x.due_on <=> y.due_on }
+      @milestones = @project.milestones.all(:order => [:due_on.asc]).sort { |x, y| 
+        x.due_on.nil? || y.due_on.nil? ? 1 : x.due_on <=> y.due_on 
+      }
       show :project
     end
     
