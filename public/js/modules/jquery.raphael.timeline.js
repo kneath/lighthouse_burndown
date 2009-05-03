@@ -14,7 +14,9 @@ jQuery.fn.timelineGraph = function(){
       labels.push($(this).html());
     });
     $(this).find('tbody td').each(function(){
-      data.push({value: $(this).html()})
+      var data_type = null;
+      if ($(this).hasClass('future')) data_type = 'future' ;
+      data.push({value: $(this).html(), type:data_type})
       data_numbers.push($(this).html());
     });
     
@@ -48,9 +50,10 @@ jQuery.fn.timelineGraph = function(){
       var y = Math.round(height - bottomgutter - Y*data[i].value),
           x = Math.round(leftgutter + X * (i + 0.5)),
           t = r.text(x, height - 6, labels[i]).attr(txt).toBack();
-      bgp[i == 0 ? "lineTo" : "cplineTo"](x, y, 10);
-      path[i == 0 ? "moveTo" : "cplineTo"](x, y, 10);
-      var dot = r.circle(x, y, 6).attr({fill: color, stroke: "#fff", "stroke-width": 2});
+      var dot_color = data[i].type == 'future' ? "#c3c3c3" : color;
+      // bgp[i == 0 ? "lineTo" : "cplineTo"](x, y, 10);
+      if (data[i].type != 'future') path[i == 0 ? "moveTo" : "cplineTo"](x, y, 10);
+      var dot = r.circle(x, y, 6).attr({fill: dot_color, stroke: "#fff", "stroke-width": 2});
       blanket.push(r.rect(leftgutter + X * i, 0, X, height - bottomgutter).attr({stroke: "none", fill: "#fff", opacity: 0}));
       var rect = blanket[blanket.length - 1];
       (function(x, y, data, lbl, dot){
@@ -62,7 +65,8 @@ jQuery.fn.timelineGraph = function(){
             newcoord.x -= 114;
           }
           frame.show().animate({x: newcoord.x, y:newcoord.y}, 200*is_label_visible);
-          label[0].attr({text:data.value + " ticket" + ((data.value == 1) ? "" : "s")}).show().animate({x: newcoord.x*1 + 50, y:newcoord.y*1 + 12}, 200 *is_label_visible);
+          var label_text = data.type == 'future' ? "Future Point" : data.value + " ticket" + ((data.value == 1) ? "" : "s");
+          label[0].attr({text:label_text}).show().animate({x: newcoord.x*1 + 50, y:newcoord.y*1 + 12}, 200 *is_label_visible);
           label[1].attr({text: lbl}).show().animate({x: newcoord.x * 1 + 50, y: newcoord.y * 1 + 27}, 200 * is_label_visible);
           dot.attr("r", 7);
           is_label_visible = true;
