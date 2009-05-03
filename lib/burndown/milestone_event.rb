@@ -13,7 +13,7 @@ module Burndown
     end
     
     def num_tickets_open
-      @@num_tickets_open = self.open_tickets.split(',').size
+      @num_tickets_open ||= self.open_tickets.split(',').size
     end
     
     def tickets_opened
