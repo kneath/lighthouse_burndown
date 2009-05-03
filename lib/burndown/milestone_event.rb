@@ -9,7 +9,7 @@ module Burndown
     belongs_to :milestone
     
     def prev_record
-      @prev_record ||= (self.class.first(:created_on.lt => self.created_on, :order => [:created_on.desc]) || MilestoneEvent.new)
+      @prev_record ||= (self.class.first(:created_on.lt => self.created_on, :milestone_id => self.milestone_id, :order => [:created_on.desc]) || MilestoneEvent.new)
     end
     
     def num_tickets_open
