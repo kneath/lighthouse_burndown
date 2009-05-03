@@ -16,7 +16,7 @@
           end
         %>
         <li>
-          <h4><a href="/timeline/<%= milestone.id %>"><%=h milestone.name %></a></h4>
+          <h4><a href="/timeline/<%= milestone.id %>" class="<%= 'past_due' if milestone.past_due? %>"><%=h milestone.name %></a></h4>
           <p>
             Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now) %>.
             <% if milestone.due_on %>
@@ -37,16 +37,9 @@
       <% @closed_milestones.each do |milestone| %>
       <li>
         <h4><a href="/timeline/<%= milestone.id %>"><%=h milestone.name %></a></h4>
-        <% if milestone.active? %>
-          <p>
-            Tracking for <%= distance_of_time_in_words(milestone.activated_at, Time.now) %>.
-            <% if milestone.due_on %>
-              Due in <%= distance_of_time_in_words(milestone.due_on, Time.now) %>.
-            <% end %>
-          </p>
-        <% else %>
-          <p>Inactive!</p>
-        <% end %>
+        <p>
+          Tracked for <%= distance_of_time_in_words(milestone.activated_at, milestone.closed_at) %>.
+        </p>
       </li>
       <% end %>
     </ul>

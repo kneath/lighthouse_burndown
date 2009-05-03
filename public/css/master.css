@@ -133,6 +133,9 @@ a{
   font-weight:bold;
   color:#006699;
 }
+a:hover{
+  color:#0095df;
+}
 
 h2{
   margin:0;
@@ -252,6 +255,9 @@ ul.projects ul.milestones li{
 ul.projects ul.milestones h4{
   margin:0;
   font-size:14px;
+}
+ul.projects ul.milestones h4 a.past_due{
+  color:#860000;
 }
 
 /* @end */
