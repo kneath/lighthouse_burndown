@@ -28,10 +28,10 @@
     <span class="big"><%= "+" if event.ticket_change > 0 %><%= event.ticket_change %></span>
     <ul class="events">
       <% if event.tickets_opened > 0 %>
-        <li><strong>Opened</strong> <em class="positive"><%= event.tickets_opened %></em> tickets</li>
+        <li><strong>Opened</strong> <em class="positive"><%= event.tickets_opened %></em> ticket<%= 's' unless event.tickets_opened == 1 %></li>
       <% end %>
       <% if event.tickets_closed > 0 %>
-        <li><strong>Closed</strong> <em class="negative"><%= event.tickets_closed %></em> tickets</li>
+        <li><strong>Closed</strong> <em class="negative"><%= event.tickets_closed %></em> ticket<%= 's' unless event.tickets_closed == 1 %></li>
       <% end %>
       <% if event.tickets_opened == 0 && event.tickets_closed == 0 %>
         <li><strong>No changes</strong></li>
