@@ -5,7 +5,7 @@
 <ul class="projects">
   <li>
     <h3><%=h @project.name %></h3>
-    <p><%= @milestones.size %> active burndown<%= 's' unless @milestones.size == 1 %></p>
+    <p><%= @milestones.select{|m| m.active? }.size %> active burndown<%= 's' unless @milestones.size == 1 %></p>
     <% if @milestones.any? %>
       <ul class="milestones">
         <% @milestones.each do |milestone| %>
@@ -33,7 +33,7 @@
   </li>
   <% if @closed_milestones.any? %>
   <li>
-    <h3>Closed / Milestones</h3>
+    <h3>Closed Milestones</h3>
     <ul class="milestones">
       <% @closed_milestones.each do |milestone| %>
       <li>
