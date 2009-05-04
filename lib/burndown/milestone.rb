@@ -39,6 +39,10 @@ module Burndown
       ((tickets_count - open_tickets_count).to_f/tickets_count.to_f*100).to_i
     end
     
+    def external_url
+      "http://#{self.project.token.account}.#{Burndown.config[:lighthouse_host]}/projects/#{self.project.remote_id}/milestones/#{self.remote_id}"
+    end
+    
      # Queries the API for each milestone (yikes!). Hope you don't have too many.
     def self.sync_with_lighthouse
       Milestone.all.each do |milestone|
