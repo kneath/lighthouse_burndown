@@ -50,9 +50,7 @@
     <tbody>
       <tr>
         <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
-          <td class="<%= 'future' if in_future?(day) %>">
-            <%= day_event_value(@timeline_events, day) %>
-          </td>
+          <td class="<%= 'future' if in_future?(day) %>"><%= day_event_value(@timeline_events, day) %></td>
         <% end %>
       </tr>
     </tbody>

@@ -53,7 +53,7 @@ jQuery.fn.timelineGraph = function(){
         leave_timer,
         blanket = r.set();
     
-    label[0] = r.text(60, 10, "24 tickets").attr(txt).hide();
+    label[0] = r.text(60, 10, "tickets").attr(txt).hide();
     label[1] = r.text(60, 40).attr(txt1).attr({fill: "#666"}).hide();
     
     for(var i=0, ii=labels.length; i<ii; i++){
