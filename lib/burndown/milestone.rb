@@ -15,13 +15,13 @@ module Burndown
     has n, :milestone_events
     
     def start_date
-      activated_at
+      @@start_date ||= Date.parse(activated_at.to_s)
     end
     
     def end_date
       due = due_on || Time.now.to_datetime
       closed = closed_at || Time.now.to_datetime
-      [due, closed].max
+      Date.parse([due, closed].max.to_s)
     end
     
     def past_due?
