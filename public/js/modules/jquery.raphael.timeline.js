@@ -8,10 +8,20 @@ jQuery.fn.timelineGraph = function(){
       top: '-9999px'
     });
     
+    var max_num_labels = 15;
+    
     // Grab the data from the table
     var labels = [], data = [], data_numbers = [];
-    $(this).find('tfoot th').each(function(){
-      labels.push($(this).html());
+    var label_cells = $(this).find('tfoot th');
+    var num_skip_cells = Math.max(Math.floor(label_cells.length/max_num_labels) - 1, 0);
+    var skip_iter = 0;
+    label_cells.each(function(){
+      var type = 'skip';
+      if (++skip_iter > num_skip_cells){
+        type = 'show';
+        skip_iter = 0;
+      }
+      labels.push({text:$(this).html(), type:type});
     });
     $(this).find('tbody td').each(function(){
       var data_type = null;
@@ -49,7 +59,7 @@ jQuery.fn.timelineGraph = function(){
     for(var i=0, ii=labels.length; i<ii; i++){
       var y = Math.round(height - bottomgutter - Y*data[i].value),
           x = Math.round(leftgutter + X * (i + 0.5)),
-          t = r.text(x, height - 6, labels[i]).attr(txt).toBack();
+          t = r.text(x, height - 6, labels[i].type == 'show' ? labels[i].text : "").attr(txt).toBack();
       var dot_color = data[i].type == 'future' ? "#c3c3c3" : color;
       // bgp[i == 0 ? "lineTo" : "cplineTo"](x, y, 10);
       if (data[i].type != 'future') path[i == 0 ? "moveTo" : "cplineTo"](x, y, 10);
@@ -67,7 +77,7 @@ jQuery.fn.timelineGraph = function(){
           frame.show().animate({x: newcoord.x, y:newcoord.y}, 200*is_label_visible);
           var label_text = data.type == 'future' ? "Future Point" : data.value + " ticket" + ((data.value == 1) ? "" : "s");
           label[0].attr({text:label_text}).show().animate({x: newcoord.x*1 + 50, y:newcoord.y*1 + 12}, 200 *is_label_visible);
-          label[1].attr({text: lbl}).show().animate({x: newcoord.x * 1 + 50, y: newcoord.y * 1 + 27}, 200 * is_label_visible);
+          label[1].attr({text: lbl.text}).show().animate({x: newcoord.x * 1 + 50, y: newcoord.y * 1 + 27}, 200 * is_label_visible);
           dot.attr("r", 7);
           is_label_visible = true;
           r.safari();

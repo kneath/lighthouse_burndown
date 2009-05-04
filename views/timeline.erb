@@ -5,14 +5,14 @@
   <table class="timeline">
     <tfoot>
       <tr>
-        <% segmented_range(@milestone.start_date, @milestone.end_date, :segments => 15) do |day| %>
+        <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
           <th><%= day.strftime("%m/%d") %></th>
         <% end %>
       </tr>
     </tfoot>
     <tbody>
       <tr>
-        <% segmented_range(@milestone.start_date, @milestone.end_date, :segments => 15) do |day| %>
+        <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
           <td class="<%= 'future' if Date.parse(day.to_s) > Date.today %>"><%= (day_event = @timeline_events.select{ |e| e.created_on.strftime("%B %e") == day.strftime("%B %e") }[0]) ? day_event.num_tickets_open : 0 %></td>
         <% end %>
       </tr>
