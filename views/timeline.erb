@@ -15,7 +15,29 @@
   </div>
 </div>
 <% end %>
-
+<%
+  @estimated_rate = {}
+  @last_value = nil
+  def day_event_value(events, day)
+    day_event = events.select{ |e| e.created_on.strftime("%B %e") == day.strftime("%B %e") }[0]
+    value = day_event ? day_event.num_tickets_open : 0
+    # Are we past today? Should we project a trajectory?
+    if in_future?(day)
+      if @estimated_rate[events.object_id]
+        rate = @estimated_rate[events.object_id]
+      else
+        events = events.to_a
+        last_events = events.size > 7 ? events.slice(-7, 7) : events.slice(-1*events.size, events.size - 1)
+        avg = last_events.inject{|sum, e| (sum.is_a?(Fixnum) ? sum : 0) + e.ticket_change }.to_f/([last_events.size, 7].min)
+        rate = avg*-1
+        @estimated_rate[events.object_id] = rate
+      end
+      value = @last_value.nil? ? 0 : @last_value - rate
+    end
+    @last_value = value
+    value.to_i
+  end
+%>
 <div class="graph">
   <table class="timeline">
     <tfoot>
@@ -28,7 +50,9 @@
     <tbody>
       <tr>
         <% @milestone.start_date.upto(@milestone.end_date) do |day| %>
-          <td class="<%= 'future' if Date.parse(day.to_s) > Date.today %>"><%= (day_event = @timeline_events.select{ |e| e.created_on.strftime("%B %e") == day.strftime("%B %e") }[0]) ? day_event.num_tickets_open : 0 %></td>
+          <td class="<%= 'future' if in_future?(day) %>">
+            <%= day_event_value(@timeline_events, day) %>
+          </td>
         <% end %>
       </tr>
     </tbody>

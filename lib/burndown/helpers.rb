@@ -33,6 +33,10 @@ module Burndown
       range.step(step_size, &block)
     end
     
+    def in_future?(day)
+      Date.parse(day.to_s) > Date.today
+    end
+    
     # Ganked from Rails
     def distance_of_time_in_words(from_time, to_time = 0, include_seconds = false, options = {})
       from_time = from_time.to_time if from_time.respond_to?(:to_time)
