@@ -28,8 +28,7 @@
       else
         events = events.to_a
         last_events = events.size > 7 ? events.slice(-7, 7) : events.slice(-1*events.size, events.size - 1)
-        avg = last_events.inject{|sum, e| (sum.is_a?(Fixnum) ? sum : 0) + e.ticket_change }.to_f/([last_events.size, 7].min)
-        rate = avg*-1
+        rate = (last_events.last.num_tickets_open - last_events.first.num_tickets_open).to_f/last_events.size
         @estimated_rate[events.object_id] = rate
       end
       value = @last_value.nil? ? 0 : @last_value - rate
