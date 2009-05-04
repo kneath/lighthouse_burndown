@@ -1,6 +1,19 @@
 <% page_info :title => "Timeline &amp; Graph",
               :breadcrumb => [ link_to(h(@milestone.project.name), "/"), link_to(h(@milestone.name), "/project/#{@milestone.project.id}") ] %>
 
+<% if @milestone.tickets_count > 0 %>
+<div class="progress">
+  <ul class="stats">
+    <li><strong><%= @milestone.percent_complete %>%</strong> <span>percent complete</span></li>
+    <li><strong><%= @milestone.open_tickets_count %></strong> <span>open tickets</span></li>
+    <li><strong><%= @milestone.due_on ? @milestone.due_on.strftime("%m/%d") : "Not Due" %></strong> <span>due date</span></li>
+  </ul>
+  <div class="progress-bar">
+    <span class="bar" style="width:<%= @milestone.percent_complete %>%"></span>
+  </div>
+</div>
+<% end %>
+
 <div class="graph">
   <table class="timeline">
     <tfoot>

@@ -34,6 +34,11 @@ module Burndown
       return false
     end
     
+    def percent_complete
+      return "N/A" if tickets_count <= 0;
+      ((tickets_count - open_tickets_count).to_f/tickets_count.to_f*100).to_i
+    end
+    
      # Queries the API for each milestone (yikes!). Hope you don't have too many.
     def self.sync_with_lighthouse
       Milestone.all.each do |milestone|

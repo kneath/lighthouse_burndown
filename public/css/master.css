@@ -487,3 +487,49 @@ ul.form-actions button{
 }
 
 /* @end */
+
+/*------------------------------------------------------------------------------------
+  @group Progress Widget
+------------------------------------------------------------------------------------*/
+
+.progress{
+  margin:20px 0;
+}
+
+.progress ul.stats{
+  margin:0 0 10px 0;
+  height:50px;
+}
+.progress ul.stats li{
+  list-style-type:none;
+  margin:0;
+  float:left;
+  width:266px;
+  height:50px;
+  text-align:center;
+  border-left:1px solid #ddd;
+}
+.progress ul.stats li:first-child{
+  border-left:none;
+}
+.progress ul.stats strong{
+  display:block;
+  font-size:30px;
+  color:#999;
+}
+.progress ul.stats span{
+  color:#666;
+}
+
+.progress-bar{
+  height:25px;
+  background:#f1f1f1;
+  border:2px solid #eee;
+}
+.progress-bar .bar{
+  display:block;
+  height:25px;
+  background:#009936;
+}
+
+/* @end */
