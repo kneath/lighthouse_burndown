@@ -27,3 +27,18 @@ namespace :app do
     Burndown::Milestone.sync_with_lighthouse
   end
 end
+
+task :environment do
+  require "lib/burndown"
+  Burndown.new(File.dirname(__FILE__) + "/config/config.yml")
+end
+
+task :cron => :environment do
+  if Time.now.hour == 23
+    puts "Updating milestones..."
+    Burndown::Milestone.sync_with_lighthouse
+    puts "done."
+  else
+    puts "Not executing for another #{23 - Time.now.hour} hours"
+  end
+end
