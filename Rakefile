@@ -34,11 +34,9 @@ task :environment do
 end
 
 task :cron => :environment do
-  if Time.now.hour == 23
+  if Time.now.hour == 01
     puts "Updating milestones..."
     Burndown::Milestone.sync_with_lighthouse
     puts "done."
-  else
-    puts "Not executing for another #{23 - Time.now.hour} hours"
   end
 end
